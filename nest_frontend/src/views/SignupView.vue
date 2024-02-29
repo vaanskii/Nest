@@ -55,7 +55,7 @@ export default{
             if (this.form.password1 === '') {
                 this.errors.push('your password is missing')
             }
-            if (this.form.phone_number === '') {
+            if (this.form.mobile_number === '') {
                 this.errors.push('your mobile number is missing')
             }
 
