@@ -1,16 +1,20 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from .models import User 
 from .forms import SignupForm
 
 @api_view(['GET'])
 def user(request):
+    if hasattr(request.user, 'mobile_number'):
+        mobile_number = str(request.user.mobile_number)
+    else:
+        mobile_number = None
+
     return JsonResponse({
         'id': request.user.id,
         'username': request.user.username,
         'email': request.user.email,
-        'mobile_number': request.user.mobile_number,
+        'mobile_number': mobile_number,
     })
 
 @api_view(['POST'])
@@ -35,4 +39,3 @@ def signup(request):
         message = form.errors.as_json()
 
     return JsonResponse({'message': message}, safe=False)
-
