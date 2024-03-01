@@ -50,10 +50,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
-
-    def to_json(self):
-        data = {
-            'phone_number': str(self.mobile_number)  # Convert PhoneNumber object to string
-            # Include other fields as needed
-        }
-        return json.dumps(data, cls=DjangoJSONEncoder)
