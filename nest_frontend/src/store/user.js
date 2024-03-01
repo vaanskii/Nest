@@ -73,7 +73,6 @@ export const useUserStore = defineStore({
             this.user.username = user.username
             this.user.email = user.email
             this.user.mobile_number = user.mobile_number
-            console.log(user.mobile_number, 'mobilenumber')
 
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.username', this.user.username)

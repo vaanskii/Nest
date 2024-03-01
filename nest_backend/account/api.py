@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .forms import SignupForm
 
@@ -34,7 +36,18 @@ def signup(request):
 
     if form.is_valid():
         user = form.save()
+        user.is_active = False
         user.save()
+
+        url = f'http://127.0.0.1:8000/activateEmail/?email={user.email}&id={user.id}'
+
+        send_mail(
+            "Please verify your email",
+            f"The url for activating your account is: {url}",
+            settings.EMAIL_HOST_USER,
+            [user.email],
+            fail_silently=False,
+        )
     else:
         message = form.errors.as_json()
 

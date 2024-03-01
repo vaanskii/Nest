@@ -58,7 +58,7 @@ export default {
                   })
                   .catch(error => {
                     console.log('error', error.message)
-                    this.errors.push('The username or password is incorrect')
+                    this.errors.push('The username or password is incorrect or your account is not activated.')
                   })
       if (this.errors.length === 0) {
         await axios
