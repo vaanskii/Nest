@@ -2,7 +2,8 @@
   <nav v-if="userStore.user.isAuthenticated">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> | 
-    <router-link to="#" @click="logout()">Logout</router-link>
+    <router-link to="#" @click="logout()">Logout</router-link> | 
+    <router-link to="/profile">Profile</router-link>
   </nav>
   <nav v-else>
     <router-link to="/">Home</router-link> |

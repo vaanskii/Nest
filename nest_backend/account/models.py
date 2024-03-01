@@ -1,13 +1,9 @@
-from django.db import models
-
 import uuid
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
-from django.core.serializers.json import DjangoJSONEncoder
-import json
 
 class CustomUserManager(UserManager):
     def _create_user(self, username, email, password, mobile_number, **extra_fields):
@@ -36,6 +32,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     mobile_number = PhoneNumberField(blank=False, null=False, unique=True)
+    followers_count = models.IntegerField(default=0)
+    following_count = models.IntegerField(default=0)
 
 
     is_active = models.BooleanField(default=True)
@@ -50,3 +48,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+class FollowSystem(models.Model):
+    FOLLOW = 'follow'
+    UNFOLLOW = 'unfollow'
+
+    STATUS_CHOICES = (
+        (FOLLOW, 'Follow'),
+        (UNFOLLOW, 'Unfollow')
+    )
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    followed_for = models.ForeignKey(User, related_name='received_follow', on_delete=models.CASCADE)
+    followed_by = models.ForeignKey(User, related_name='created_follow', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=FOLLOW)
+
+    class Meta:
+        unique_together = ('followed_for', 'followed_by')
