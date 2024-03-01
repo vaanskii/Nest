@@ -34,6 +34,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 ALLOWED_HOSTS = []
 
+WEBSITE_URL = 'http://127.0.0.1:8000'
+
 AUTH_USER_MODEL = 'account.User'
 
 REST_FRAMEWORK = {

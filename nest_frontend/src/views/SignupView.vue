@@ -27,7 +27,15 @@
 
 <script>
 import axios from 'axios'
+import { useToastStore } from '@/store/toast'
 export default{
+    setup() {
+        const toastStore = useToastStore()
+
+        return {
+            toastStore
+        }
+    },
     data() {
         return {
             form: {
@@ -67,6 +75,7 @@ export default{
                     .post('/api/signup/', this.form)
                     .then(response => {
                         if (response.data.message === 'success') {
+                            this.toastStore.showToast(5000, 'The user is registered. Please check your email and verify account.', 'bg-emerald-500')
 
                             this.form.email = ''
                             this.form.username = ''
@@ -78,6 +87,7 @@ export default{
                             for (const key in data) {
                                 this.errors.push(data[key][0].message)
                             }
+                            this.toastStore.showToast(5000, 'Something went wrong. Please try again', 'bg-red-300')
                         }
                         console.log(response.data)
 

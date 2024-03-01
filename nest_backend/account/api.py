@@ -39,7 +39,7 @@ def signup(request):
         user.is_active = False
         user.save()
 
-        url = f'http://127.0.0.1:8000/activateEmail/?email={user.email}&id={user.id}'
+        url = f'{settings.WEBSITE_URL}/activateEmail/?email={user.email}&id={user.id}'
 
         send_mail(
             "Please verify your email",

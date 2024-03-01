@@ -9,12 +9,14 @@
     <router-link to="/about">About</router-link> | 
     <router-link to="/signup">Sign up</router-link> |
     <router-link to="/login">Login</router-link>
+    <Toast/>
   </nav>
   <router-view/>
 </template>
 
 <script>
 import { useUserStore } from '@/store/user'
+import Toast from '@/components/Toast.vue'
 import axios from 'axios'
 export default{
   setup() {
@@ -37,6 +39,9 @@ export default{
       this.userStore.removeToken()
       this.$router.push('/login')
     }
+  },
+  components: {
+    Toast
   }
 }
 
