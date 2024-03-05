@@ -1,5 +1,9 @@
 <template>
   <nav v-if="userStore.user.isAuthenticated && userStore.user.id">
+    <form v-on:submit.prevent="submitSearch">
+      <input v-model="searchQuery" type="search" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> | 
     <RouterLink :to="{name: 'profile', params: {'id': userStore.user.id}}">Profile</RouterLink> |
@@ -24,7 +28,8 @@ export default{
   setup() {
     const userStore = useUserStore()
     return {
-      userStore
+      userStore,
+      searchQuery: '',
     }
   },
   beforeCreate() {
@@ -40,7 +45,14 @@ export default{
     logout() {
       this.userStore.removeToken()
       this.$router.push('/login')
-    }
+    },
+    submitSearch() {
+      // Redirect to the search view with the search query
+      if (this.searchQuery.trim() !== '') {
+        // Redirect to the search view with the search query
+        this.$router.push({ name: 'search', query: { q: this.searchQuery } });
+      }
+    },
   },
   components: {
     Toast,
@@ -49,6 +61,8 @@ export default{
 }
 
 </script>
+
+
 
 <style lang="scss">
 #app {

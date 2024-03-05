@@ -93,6 +93,7 @@
       .then((response) => {
         this.user.is_following = true;
         console.log("Followed", response.data);
+        this.user.followers_count += 1
       })
       .catch((error) => {
         console.log("error", error);
@@ -103,6 +104,7 @@
       .post(`/api/following/${this.$route.params.id}/unfollow/`)
       .then((response) => {
         this.user.is_following = false;
+        this.user.followers_count -= 1
         console.log("Unfollowed", response.data);
       })
       .catch((error) => {

@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import FollowingsView from '../views/FollowingsView.vue'
 import FollowersView from '../views/FollowersView.vue'
+import SearchView from '../views/SearchView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/profile/:id/followers',
     name: 'followers',
     component: FollowersView
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchView
   },
   {
     path: '/about',
