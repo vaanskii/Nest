@@ -1,0 +1,599 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2024-03-05T01:35:40.695Z",
+    "user": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "content_type": 6,
+    "object_id": "374afb48-a207-4550-bb42-88a590e501f8",
+    "object_repr": "vaanskii",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is active\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2024-03-05T14:20:41.010Z",
+    "user": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "content_type": 6,
+    "object_id": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "object_repr": "admin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Email\", \"Mobile number\", \"Following count\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2024-03-05T14:21:08.553Z",
+    "user": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "content_type": 6,
+    "object_id": "374afb48-a207-4550-bb42-88a590e501f8",
+    "object_repr": "vaanskii",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Following\", \"Followers\", \"Followers count\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add follow system",
+    "content_type": 7,
+    "codename": "add_followsystem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change follow system",
+    "content_type": 7,
+    "codename": "change_followsystem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete follow system",
+    "content_type": 7,
+    "codename": "delete_followsystem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view follow system",
+    "content_type": 7,
+    "codename": "view_followsystem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "account",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "account",
+    "model": "followsystem"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xwgo0h3jvtf539akal2fdh6ks0gzofwm",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlv24t9S0nOGaNfekABKpHwqxN1JpBTQvpl5b9XQunTNOsvU9FVdVBaMpZBoXwtrn9Bryt5qsqFWiC7DGdTpN2MqTxn2tj5ouI-mjMMy9Wx2xRx0Nrexyut6uH8HHc3dVgvagGKj9Ziyy-QklhaCA0jCCJzB-WhboMIQRZhDIm7JbytaqqQ-X-JUQQY:1rhJi6:17tVyg5kznH3gQI35kLZX2rdtOr9WSH1Zr0tG791NEU",
+    "expire_date": "2024-03-19T01:35:14.675Z"
+  }
+},
+{
+  "model": "account.user",
+  "pk": "374afb48-a207-4550-bb42-88a590e501f8",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$GE8C1bqC2Dh2E85hnpcF3P$9Ecy8wrotaTeMeag3li4j9Lyvj6E1vCIwg+FnV9n6IY=",
+    "username": "vaanskii",
+    "email": "giorgivanadze03@gmail.com",
+    "mobile_number": "+995574003444",
+    "followers_count": 0,
+    "following_count": 1,
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "date_joined": "2024-03-05T01:35:35Z",
+    "last_login": null,
+    "groups": [],
+    "user_permissions": [],
+    "following": [
+      "8e96ccae-4dcb-4794-a840-a05dd2618232"
+    ]
+  }
+},
+{
+  "model": "account.user",
+  "pk": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$HEe1IM5grjOorJVRxwOVVA$cZATe0901ATufSfJUfOqUMJnu6ObO1yfG46ljJvpMqk=",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "mobile_number": "+995555555555",
+    "followers_count": 1,
+    "following_count": 0,
+    "is_active": true,
+    "is_superuser": true,
+    "is_staff": true,
+    "date_joined": "2024-03-05T01:35:03Z",
+    "last_login": "2024-03-05T01:35:14Z",
+    "groups": [],
+    "user_permissions": [],
+    "following": [
+      "374afb48-a207-4550-bb42-88a590e501f8"
+    ]
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "013d16a8-acb3-4631-81df-4aedcb32c5fc",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T02:46:42.353Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "016eb315-b147-4dd3-a2ee-d1ee41229ae6",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T16:13:10.320Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "32e7c125-30a7-477c-a38b-3f454d44e65c",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T01:40:02.005Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "459a6277-7f3d-418a-893b-8075907e6f8f",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T13:43:50.950Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "45ea8fc5-0448-425c-87fc-08a44d729202",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T15:17:49.706Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "48ac4073-b4a8-42e9-bf85-43e361bd5ec1",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T13:45:03.653Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "4d40b83a-46d3-4608-ad00-cad3f4ed5544",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T15:18:25.262Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "4f2b2fcf-47fb-4233-bef7-a8d018575ab7",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T13:53:41.994Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "53accd7b-df4b-4813-b29a-f871394c93a8",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T01:36:16.759Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "65ff0a54-7a1c-400c-929c-57b747905492",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T13:46:41.440Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "676ba6ca-6d3c-4a7c-bfcf-9b2150a4c23c",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T14:24:03.809Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "7ae43242-cd2a-429b-8b3f-08f36f826a7c",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T01:36:04.928Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "7c17e286-215b-4b97-ac8b-f46bc17c8bde",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T16:26:27.964Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "7eb7a757-4db4-4e01-8063-f618b8eb6749",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T01:39:59.574Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "818e087b-2859-41dc-a562-954f50eff30c",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T15:16:15.589Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "89d45fbc-31c8-4e64-a2f3-2c5712e4c36f",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T02:46:36.853Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "8e2155a1-2ab3-4cd3-918c-c0607e11d06d",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T13:36:32.613Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "901bdd4f-e242-4718-ae46-6af79436c0f1",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T13:43:23.148Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "baf972b6-f531-48a4-ad0d-0ba5b3909521",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T14:20:09.245Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "cd8d6107-d51d-480f-ac3b-74e9f4bc77e9",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T13:43:33.954Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "d354442b-ad67-460a-82fd-335bb25d7c05",
+  "fields": {
+    "follower": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "following": "374afb48-a207-4550-bb42-88a590e501f8",
+    "created_at": "2024-03-05T13:31:38.463Z"
+  }
+},
+{
+  "model": "account.followsystem",
+  "pk": "fd322af7-8100-4896-8ba2-66d129761a56",
+  "fields": {
+    "follower": "374afb48-a207-4550-bb42-88a590e501f8",
+    "following": "8e96ccae-4dcb-4794-a840-a05dd2618232",
+    "created_at": "2024-03-05T14:20:18.119Z"
+  }
+}
+]

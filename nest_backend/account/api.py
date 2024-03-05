@@ -93,9 +93,13 @@ def followers(request, id):
 @api_view(['POST'])
 def follow_user(request, id):
     user_to_follow = get_object_or_404(User, id=id)
-    
+
+    if user_to_follow == request.user:
+        return JsonResponse({'message': 'You cannot follow yourself!'}, status=400)
+
     if not request.user.following.filter(id=id).exists():
         FollowSystem.objects.create(follower=request.user, following=user_to_follow)
+        print(f"Follow relationship created: {request.user.username} -> {user_to_follow.username}")
 
         request.user.following.add(user_to_follow)
         user_to_follow.followers.add(request.user)
@@ -109,9 +113,15 @@ def follow_user(request, id):
     return JsonResponse({'message': f'Now following {user_to_follow.username}'}, safe=False)
 
 
+
+
 @api_view(['POST'])
 def unfollow_user(request, id):
     user_to_unfollow = get_object_or_404(User, id=id)
+    
+    if user_to_unfollow == request.user:
+        return JsonResponse({'message': 'You cannot unfollow yourself!'}, status=400)
+
     request.user.following.remove(user_to_unfollow)
     user_to_unfollow.followers.remove(request.user)
     
