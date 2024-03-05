@@ -35,8 +35,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     mobile_number = PhoneNumberField(blank=False, null=False, unique=True)
-    following = models.ManyToManyField('self', blank=True, null=True)
-    followers = models.ManyToManyField('self', blank=True, null=True)
+    following = models.ManyToManyField('self')
+    followers = models.ManyToManyField('self')
     followers_count = models.IntegerField(default=0)
     following_count = models.IntegerField(default=0)
 
