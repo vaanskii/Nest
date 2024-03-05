@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth import get_user_model
 
 class CustomUserManager(UserManager):
     def _create_user(self, username, email, password, mobile_number, **extra_fields):
@@ -23,6 +24,8 @@ class CustomUserManager(UserManager):
         return self._create_user(username, email, password, mobile_number, **extra_fields)
     
     def create_superuser(self, username=None, email=None, password=None, mobile_number=None, **extra_fields):
+        if mobile_number is None:
+            mobile_number = '' 
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(username, email, password, mobile_number, **extra_fields)
@@ -32,6 +35,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     mobile_number = PhoneNumberField(blank=False, null=False, unique=True)
+    following = models.ManyToManyField('self', blank=True, null=True)
+    followers = models.ManyToManyField('self', blank=True, null=True)
     followers_count = models.IntegerField(default=0)
     following_count = models.IntegerField(default=0)
 
@@ -49,20 +54,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+
 class FollowSystem(models.Model):
-    FOLLOW = 'follow'
-    UNFOLLOW = 'unfollow'
-
-    STATUS_CHOICES = (
-        (FOLLOW, 'Follow'),
-        (UNFOLLOW, 'Unfollow')
-    )
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    followed_for = models.ForeignKey(User, related_name='received_follow', on_delete=models.CASCADE)
-    followed_by = models.ForeignKey(User, related_name='created_follow', on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, related_name='follower_follows', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='received_follow', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=FOLLOW)
-
-    class Meta:
-        unique_together = ('followed_for', 'followed_by')

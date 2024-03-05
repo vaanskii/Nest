@@ -1,9 +1,9 @@
 <template>
-  <nav v-if="userStore.user.isAuthenticated">
+  <nav v-if="userStore.user.isAuthenticated && userStore.user.id">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> | 
-    <router-link to="#" @click="logout()">Logout</router-link> | 
-    <router-link to="/profile">Profile</router-link>
+    <RouterLink :to="{name: 'profile', params: {'id': userStore.user.id}}">Profile</RouterLink> |
+    <a href="#" @click="logout()">Logout</a>
   </nav>
   <nav v-else>
     <router-link to="/">Home</router-link> |
@@ -18,6 +18,7 @@
 <script>
 import { useUserStore } from '@/store/user'
 import Toast from '@/components/Toast.vue'
+import { RouterLink } from 'vue-router'
 import axios from 'axios'
 export default{
   setup() {
@@ -42,7 +43,8 @@ export default{
     }
   },
   components: {
-    Toast
+    Toast,
+    RouterLink,
   }
 }
 

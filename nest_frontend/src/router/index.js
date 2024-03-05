@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import ProfileView from '../views/ProfileView.vue'
-
+import FollowingsView from '../views/FollowingsView.vue'
+import FollowersView from '../views/FollowersView.vue'
 
 const routes = [
   {
@@ -22,9 +23,19 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path: '/profile/:id/following',
+    name: 'following',
+    component: FollowingsView
+  },
+  {
+    path: '/profile/:id/followers',
+    name: 'followers',
+    component: FollowersView
   },
   {
     path: '/about',

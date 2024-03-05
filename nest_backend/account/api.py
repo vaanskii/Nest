@@ -2,7 +2,11 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
+from .models import User, FollowSystem
+from .serializers import UserSerializer
 from .forms import SignupForm
 
 @api_view(['GET'])
@@ -52,3 +56,69 @@ def signup(request):
         message = form.errors.as_json()
 
     return JsonResponse({'message': message}, safe=False)
+
+@api_view(['GET'])
+@login_required
+def profileview(request, id):
+    user = User.objects.get(pk=id)
+    user_serializer = UserSerializer(user)
+
+    is_following = request.user.is_authenticated and request.user.following.filter(id=id).exists()
+
+    return JsonResponse({
+        'user': user_serializer.data,
+        'is_following': is_following,
+    }, safe=False)
+
+@api_view(['GET'])
+def following(request, id):
+    user = User.objects.get(id=id)
+    following = user.following.all()
+
+    return JsonResponse({
+        'user': UserSerializer(user).data,
+        'following': UserSerializer(following, many=True).data,
+    }, safe=False)
+
+@api_view(['GET'])
+def followers(request, id):
+    user = User.objects.get(id=id)
+    followers = user.followers.all()
+
+    return JsonResponse({
+        'user': UserSerializer(user).data,
+        'followers': UserSerializer(followers, many=True).data,
+    }, safe=False)
+
+@api_view(['POST'])
+def follow_user(request, id):
+    user_to_follow = get_object_or_404(User, id=id)
+    
+    if not request.user.following.filter(id=id).exists():
+        FollowSystem.objects.create(follower=request.user, following=user_to_follow)
+
+        request.user.following.add(user_to_follow)
+        user_to_follow.followers.add(request.user)
+
+        request.user.following_count = request.user.following.count()
+        user_to_follow.followers_count = user_to_follow.followers.count()
+
+        request.user.save()
+        user_to_follow.save()
+
+    return JsonResponse({'message': f'Now following {user_to_follow.username}'}, safe=False)
+
+
+@api_view(['POST'])
+def unfollow_user(request, id):
+    user_to_unfollow = get_object_or_404(User, id=id)
+    request.user.following.remove(user_to_unfollow)
+    user_to_unfollow.followers.remove(request.user)
+    
+    request.user.following_count = request.user.following.count()
+    user_to_unfollow.followers_count = user_to_unfollow.followers.count()
+
+    request.user.save()
+    user_to_unfollow.save()
+
+    return JsonResponse({'message': f'Unfollowed {user_to_unfollow.username}'}, safe=False)
