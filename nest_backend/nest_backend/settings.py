@@ -57,7 +57,6 @@ CSRF_TRUSTED_ORIGINS = [
     "http://192.168.1.106:8080"
 ]
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,6 +71,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'account',
     'search',
+    'posts',
 ]
 
 MIDDLEWARE = [

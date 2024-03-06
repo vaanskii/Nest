@@ -37,10 +37,6 @@
     },
   
     methods: {
-      submitForm() {
-        this.$router.push({ name: 'search', query: { q: this.query } });
-      },
-  
       fetchSearchResults() {
         axios
           .post('/api/search/', { query: this.query })

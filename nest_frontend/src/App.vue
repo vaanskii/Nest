@@ -47,9 +47,7 @@ export default{
       this.$router.push('/login')
     },
     submitSearch() {
-      // Redirect to the search view with the search query
       if (this.searchQuery.trim() !== '') {
-        // Redirect to the search view with the search query
         this.$router.push({ name: 'search', query: { q: this.searchQuery } });
       }
     },

@@ -2,6 +2,9 @@
     <template v-if="userStore.user.isAuthenticated">
       <h1><strong>{{ user.username }}</strong></h1>
       <div class="flex flex-row justify-center" v-if="user.id">
+        <RouterLink to='#' class="mr-4">
+          {{ user.posts_count }} Posts
+        </RouterLink>
         <RouterLink :to="{ name: 'followers', params: { 'id': user.id }}">
           {{ user.followers_count }} followers
         </RouterLink>
