@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from account.models import User
+from django.utils.timezone import now
 
 
 class Like(models.Model):
@@ -25,6 +26,19 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+    def created_at_formatted(self):
+        time_difference = now() - self.created_at
+        days = time_difference.days
+        hours, remainder = divmod(time_difference.seconds, 3600)
+        minutes = remainder // 60
+
+        if days > 0:
+            return f"{days} {'day' if days == 1 else 'days'} and {hours} {'hour' if hours == 1 else 'hours'} ago"
+        elif hours > 0:
+            return f"{hours} {'hour' if hours == 1 else 'hours'} and {minutes} {'minute' if minutes == 1 else 'minutes'} ago"
+        else:
+            return f"{minutes} {'minute' if minutes == 1 else 'minutes'} ago"
 
 
     def __str__(self):

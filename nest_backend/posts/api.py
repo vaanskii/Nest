@@ -3,6 +3,8 @@ from django.middleware import csrf
 from rest_framework.decorators import api_view
 
 from .models import Post
+from account.models import User
+from account.serializers import UserSerializer
 from .forms import PostForm
 from .serializers import PostSerializer
 
@@ -24,6 +26,19 @@ def posts(request):
     serializer = PostSerializer(posts, many=True)
 
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def profile_posts(request, id):
+    user = User.objects.get(id=id)
+    posts = Post.objects.filter(created_by_id=id)
+
+    posts_serializer = PostSerializer(posts, many=True)
+    user_serializer = UserSerializer(user)
+
+    return JsonResponse({
+        'posts': posts_serializer.data,
+        'user': user_serializer.data
+    }, safe=False)
 
 
 @api_view(['POST'])
