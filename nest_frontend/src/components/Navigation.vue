@@ -1,12 +1,10 @@
 <template>
-
-
     <nav class="py-10 px-8 border-b border-gray-200">
       <div class="max-w-7xl mx-auto">
           <div class="flex items-center justify-between">
               <div class="menu-left flex justify-center items-center">
                   <a href="/" class="text-xl font-extrabold">NEST</a>
-                    <form  v-on:submit.prevent="submitSearch" class="w-[300px] -md mx-auto ml-14">   
+                    <form  v-on:submit.prevent="submitSearch" class="w-[300px] -md mx-auto ml-14" v-if="userStore.user.isAuthenticated">   
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
