@@ -6,6 +6,7 @@ import ProfileView from '../views/ProfileView.vue'
 import FollowingsView from '../views/FollowingsView.vue'
 import FollowersView from '../views/FollowersView.vue'
 import SearchView from '../views/SearchView.vue'
+import PostView from '../views/PostView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchView
+  },
+  {
+    path: '/posts/:id',
+    name: 'postview',
+    component: PostView
   },
 ]
 

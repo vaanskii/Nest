@@ -1,55 +1,57 @@
 <template>
-    <template v-if="userStore.user.isAuthenticated">
-      <h1><strong>{{ user.username }}</strong></h1>
-      <div class="flex flex-row justify-center" v-if="user.id">
-        <RouterLink to='#' class="mr-4">
+    <template v-if="userStore.user.isAuthenticated" class="flex justify-center items-center">
+      <div class="flex justify-center items-center mt-10">
+        <div class="w-20 h-20 bg-gray-900 rounded-full"></div>
+        <h1 class="ml-64"><strong>{{ user.username }}</strong></h1>
+      </div>  
+      <div class="flex flex-row justify-center mt-8" v-if="user.id">
+        <p class="mr-4 font-bold">
           {{ user.posts_count }} Posts
-        </RouterLink>
-        <RouterLink :to="{ name: 'followers', params: { 'id': user.id }}">
-          {{ user.followers_count }} followers
+        </p>
+        <RouterLink :to="{ name: 'followers', params: { 'id': user.id }}"
+        class="font-bold"
+        >
+          {{ user.followers_count }} Followers
         </RouterLink>
         <RouterLink
           :to="{ name: 'following', params: { 'id': user.id }}"
-          class="ml-4"
+          class="ml-4 font-bold"
         >
-          {{ user.following_count }} following
+          {{ user.following_count }} Following
         </RouterLink>
       </div>
-  
-      <button
-        class="py-2 px-2 mb-5 mt-4 bg-gray-500 rounded-xl"
-        v-if="userStore.user.id !== user.id"
-        @click="toggleFollow"
-      >
-        {{ user.is_following ? 'Unfollow' : 'Follow' }}
-      </button>
-  
-      <button
-        class="py-2 px-2 mb-5 mt-4 bg-gray-500 rounded-xl"
-        v-else
-      >
-        Edit profile
-      </button>
+      <div class="flex justify-center">
+        <button
+          class="py-2 px-2 mb-5 mt-5 bg-black text-white rounded-2xl w-96"
+          v-if="userStore.user.id !== user.id"
+          @click="toggleFollow"
+        >
+          {{ user.is_following ? 'Following' : 'Follow' }}
+        </button>
+    
+        <button
+          class="py-2 px-2 mb-5 mt-5 bg-black text-white rounded-2xl w-96"
+          v-else
+        >
+          Edit profile
+        </button>
+      </div>
+      <div class="flex justify-center mt-5">
+        <hr class="w-[500px] h-0.5 mx-auto bg-gray-100 border-0 rounded my-3 dark:bg-black mb-5">
+      </div>
   
     </template>
     <template v-else>
       <h1><strong>Please Login to see the profile page</strong></h1>
     </template>
 
-    <div class ="flex justify-center mb-5"
-        v-for="post in posts"
-        v-bind:key="post.id"
-        >
-        <div class="w-[500px] bg-gray-200 flex items-start flex-col rounded-lg shadow-inner ">
-            <p class="ml-4 py-3"><strong>{{ post.created_by.username }} </strong> <small class="ml-1">{{ post.created_at_formatted }}</small> </p>
-            <p class="w-[440px] ml-7 bg-gray-50 rounded-lg mb-5 py-5 px-3 flex just-start">{{ post.body }}</p>
-        </div>
-    </div>
+    <Feed/>
   </template>
   
   <script>
   import { useUserStore } from "@/store/user";
   import { useToastStore } from "@/store/toast";
+  import Feed from "@/components/Feed.vue";
   import axios from "axios";
   export default {
     setup() {
@@ -70,6 +72,9 @@
         posts: [],
 
       };
+    },
+    components: {
+      Feed
     },
     mounted() {
       this.getUser();

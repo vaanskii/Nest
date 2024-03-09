@@ -11,7 +11,7 @@ class Like(models.Model):
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    body = models.CharField(blank=True, null=True, max_length=256)
+    body = models.CharField(blank=True, null=True, max_length=2000)
 
     likes = models.ManyToManyField(Like, blank=True)
     likes_count = models.IntegerField(default=0)
@@ -34,11 +34,13 @@ class Post(models.Model):
         minutes = remainder // 60
 
         if days > 0:
-            return f"{days} {'day' if days == 1 else 'days'} and {hours} {'hour' if hours == 1 else 'hours'} ago"
+            return f"{days}d"
         elif hours > 0:
-            return f"{hours} {'hour' if hours == 1 else 'hours'} and {minutes} {'minute' if minutes == 1 else 'minutes'} ago"
+            return f"{hours}h"
         else:
-            return f"{minutes} {'minute' if minutes == 1 else 'minutes'} ago"
+            return f"{minutes}m"
+
+
 
 
     def __str__(self):

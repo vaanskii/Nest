@@ -12,7 +12,7 @@ def search(request):
     query = data.get('query', '')
 
     # Define the fields you want to search on
-    search_fields = ['username', 'email']
+    search_fields = ['username', 'email',]
 
     # Create a Q object that combines queries for each field
     search_query = Q()
