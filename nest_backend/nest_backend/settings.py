@@ -49,13 +49,19 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "http://192.168.1.106:8080"
+    "http://192.168.1.106:8080",
+    "http://192.168.1.107:8080",
+    "http://192.168.200.15:8080"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",
-    "http://192.168.1.106:8080"
+    "http://192.168.1.106:8080",
+    "http://192.168.1.107:8080",
+    "http://192.168.200.15:8080"
 ]
+
+
 
 
 INSTALLED_APPS = [

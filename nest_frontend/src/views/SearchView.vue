@@ -1,16 +1,18 @@
 <template>
     <div>
-      <div v-if="users.length">
-        <div v-for="user in users" :key="user.id">
-          <p>
+      <div v-if="users.length" class="flex justify-center flex-col items-center mt-5">
+        <RouterLink :to="{ name: 'profile', params: { 'id': user.id } }" v-for="user in users" :key="user.id" class="flex flex-row w-[300px]  bg-gray-200 mb-5 h-[50px] items-center rounded-full hover:bg-gray-300">
+          <div class="w-7 h-7 bg-black rounded-full ml-2"></div>
+          <p class="items-start flex ml-4 text-black w-[100px]">
             <strong>
-              <RouterLink :to="{ name: 'profile', params: { 'id': user.id } }">{{ user.username }}</RouterLink>
+              <p>{{ user.username }}</p>
             </strong>
           </p>
-        </div>
+          <small class="ml-10">{{ user.followers_count }} Followers</small>
+        </RouterLink>
       </div>
       <div v-else>
-        <h1>User not found!</h1>
+        <h1 class="text-black text-lg font-mono font-bold uppercase mt-20">User not found!</h1>
       </div>
     </div>
   </template>
