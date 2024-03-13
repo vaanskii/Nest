@@ -4,6 +4,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from PIL import Image
+from io import BytesIO
 
 from .models import User, FollowSystem
 from .serializers import UserSerializer
@@ -88,14 +90,27 @@ def editprofile(request):
         form = ProfileForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
+            if 'profile_picture' in request.FILES:
+                # Retrieve the uploaded image file
+                image_file = request.FILES['profile_picture']
+
+                img = Image.open(image_file)
+                
+                if img.mode == 'RGBA':
+                    img = img.convert('RGB')
+
+                img.save(user.profile_picture.path, format='JPEG')
+
             form.save()
 
-        serializer = UserSerializer(user)
+            serializer = UserSerializer(user)
 
-        return JsonResponse({
-            'message': 'Information updated',
-            'user': serializer.data
+            return JsonResponse({
+                'message': 'Information updated',
+                'user': serializer.data
             }, safe=False)
+        else:
+            return JsonResponse({'message': 'Form data is not valid'})
 
 
 @api_view(['GET'])

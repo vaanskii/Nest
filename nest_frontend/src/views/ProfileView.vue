@@ -1,7 +1,7 @@
 <template>
     <template v-if="userStore.user.isAuthenticated" class="flex justify-center items-center">
       <div class="flex justify-center flex-col items-center mt-10">
-        <img :src="user.get_profile_picture" class="w-[150px] max-h-[150px] rounded-full">
+        <img :src="user.get_profile_picture" class="w-[150px] h-[150px] rounded-full">
         <h1 class="mt-4"><strong>{{ user.username }}</strong></h1>
       </div>  
       <div class="flex flex-row justify-center space-x-4 mt-8" v-if="user.id">

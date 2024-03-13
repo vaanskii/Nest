@@ -122,7 +122,7 @@ export default{
 
             if (this.errors.length === 0) {
                 let formData = new FormData()
-                formData.append('profile_picture', this.$refs.file.files[0])
+                formData.append('profile_picture', this.$refs.files.files[0])
                 formData.append('username', this.form.username)
                 formData.append('email', this.form.email)
                 formData.append('mobile_number', this.form.mobile_number)
