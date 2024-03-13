@@ -8,6 +8,7 @@ import FollowersView from '../views/FollowersView.vue'
 import SearchView from '../views/SearchView.vue'
 import PostView from '../views/PostView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
+import ChangePasswordView from '../views/ChangePasswordView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
 
 const routes = [
@@ -35,6 +36,11 @@ const routes = [
     path: '/profile/edit',
     name: 'editprofile',
     component: EditProfileView
+  },
+  {
+    path: '/profile/edit/password',
+    name: 'changepassword',
+    component: ChangePasswordView
   },
   {
     path: '/profile/:id/following',

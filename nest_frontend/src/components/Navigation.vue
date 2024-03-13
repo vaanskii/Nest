@@ -47,9 +47,15 @@
                   </RouterLink>
                   </template>
               </div>
-              <div v-else>
-                    <RouterLink to="/signup" class="py-3 px-6 mr-4  bg-gray-800 hover:bg-gray-900 text-white rounded-2xl">Signup</RouterLink>
-                    <RouterLink to="/login" class="py-3 px-6 bg-gray-800 hover:bg-gray-900 text-white rounded-2xl">Login</RouterLink>
+              <div v-else class="ml-[800px] space-x-4">
+                      <RouterLink to="/login" class="rounded px-5 py-2.5 overflow-hidden group bg-black relative hover:bg-gradient-to-r hover:from-black hover:to-black text-white hover:ring-2 hover:ring-offset-2 hover:ring-black transition-all ease-out duration-300">
+                        <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                        <span class="relative px-5">Login</span>
+                      </RouterLink>
+                      <RouterLink to="/signup" class="rounded px-5 py-2.5 overflow-hidden group bg-black relative hover:bg-gradient-to-r hover:from-black hover:to-black text-white hover:ring-2 hover:ring-offset-2 hover:ring-black transition-all ease-out duration-300">
+                        <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                        <span class="relative px-4">Sign up</span>
+                      </RouterLink>
               </div>
               <div class="menu-right">
                     <form  v-on:submit.prevent="submitSearch" class="ml-10 mr-20" v-if="userStore.user.isAuthenticated">   

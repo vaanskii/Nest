@@ -11,6 +11,7 @@ from PIL import Image
 from .models import User, FollowSystem
 from .serializers import UserSerializer
 from .forms import SignupForm, ProfileForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 @api_view(['GET'])
 def user(request):
@@ -74,6 +75,8 @@ def profileview(request, id):
         'is_following': is_following,
     }, safe=False)
 
+
+
 @api_view(['POST'])
 def editprofile(request):
     user = request.user
@@ -112,6 +115,20 @@ def editprofile(request):
             }, safe=False)
         else:
             return JsonResponse({'message': 'Form data is not valid'})
+        
+
+@api_view(['POST'])
+def editpassword(request):
+    user = request.user
+    
+    form = PasswordChangeForm(data=request.POST, user=user)
+
+    if form.is_valid():
+        form.save()
+
+        return JsonResponse({'message': 'success'})
+    else:
+        return JsonResponse({'message': form.errors.as_json()}, safe=False)
 
 
 @api_view(['GET'])
@@ -124,6 +141,8 @@ def following(request, id):
         'following': UserSerializer(following, many=True).data,
     }, safe=False)
 
+
+
 @api_view(['GET'])
 def followers(request, id):
     user = User.objects.get(id=id)
@@ -133,6 +152,8 @@ def followers(request, id):
         'user': UserSerializer(user).data,
         'followers': UserSerializer(followers, many=True).data,
     }, safe=False)
+
+
 
 @api_view(['POST'])
 def follow_user(request, id):

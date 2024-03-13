@@ -73,7 +73,9 @@
                         <button type="submit" class="relative h-[50px] w-72 overflow-hidden border border-black bg-white px-3 text-black shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-black before:transition-all before:duration-500 hover:text-white hover:shadow-black rounded-md hover:before:left-0 hover:before:w-full"><span class="relative z-10">Save changes</span></button>
                     </div>
                 </form>
-
+            </div>
+            <div class="mt-10 py-4 w-[320px] ml-[82px] rounded-lg border-black bg-black text-white border">
+                <RouterLink  :to="{name: 'changepassword'}">Change password</RouterLink>
             </div>
         </div>
 

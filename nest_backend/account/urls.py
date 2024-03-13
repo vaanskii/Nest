@@ -13,5 +13,6 @@ urlpatterns = [
     path('following/<uuid:id>/unfollow/', api.unfollow_user, name='unfollow_user'),
     path('following/<uuid:id>/', api.following, name='following'),
     path('followers/<uuid:id>/', api.followers, name='followers'),
-    path('editprofile/', api.editprofile, name='edit_profile')
+    path('editprofile/', api.editprofile, name='edit_profile'),
+    path('editpassword/', api.editpassword, name='editpassword'),
 ]

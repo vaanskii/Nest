@@ -32,7 +32,7 @@
         <div v-else class="flex flex-row justify-center items-center">
           <RouterLink
           :to="{name: 'editprofile'}"
-          class="py-2 px-2 mb-5 mt-5 ml-10 bg-black text-white rounded-2xl w-80"
+          class="py-2 px-2 mb-5 mt-5 ml-20 bg-black text-white rounded-2xl w-72"
           
         >
           Edit profile
