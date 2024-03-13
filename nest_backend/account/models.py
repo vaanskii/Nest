@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
-from django.contrib.auth import get_user_model
+from django.conf import settings
 
 class CustomUserManager(UserManager):
     def _create_user(self, username, email, password, mobile_number, **extra_fields):
@@ -36,6 +36,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     mobile_number = PhoneNumberField(blank=False, null=False, unique=True)
     following = models.ManyToManyField('self', related_name='followers', symmetrical=False)
+    profile_picture = models.ImageField(upload_to='profile_picture', blank=True, null=True)
+
     followers_count = models.IntegerField(default=0)
     following_count = models.IntegerField(default=0)
 
@@ -53,6 +55,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    def get_profile_picture(self):
+        if self.profile_picture:
+            return settings.WEBSITE_URL + self.profile_picture.url
+        else:
+            return settings.DEFAULT_AVATAR_URL
 
 
 class FollowSystem(models.Model):

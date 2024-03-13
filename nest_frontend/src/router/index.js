@@ -7,6 +7,7 @@ import FollowingsView from '../views/FollowingsView.vue'
 import FollowersView from '../views/FollowersView.vue'
 import SearchView from '../views/SearchView.vue'
 import PostView from '../views/PostView.vue'
+import EditProfileView from '../views/EditProfileView.vue'
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/profile/:id',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path: '/profile/edit',
+    name: 'editprofile',
+    component: EditProfileView
   },
   {
     path: '/profile/:id/following',

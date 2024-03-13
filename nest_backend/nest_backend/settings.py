@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 
 WEBSITE_URL = 'http://127.0.0.1:8000'
 
+DEFAULT_AVATAR_URL = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg'
+
 AUTH_USER_MODEL = 'account.User'
 
 REST_FRAMEWORK = {
@@ -158,6 +160,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -13,6 +13,7 @@ export const useUserStore = defineStore({
             mobile_number: null,
             access: null,
             refresh: null,
+            profile_picture: null
         }
     }),
 
@@ -25,6 +26,7 @@ export const useUserStore = defineStore({
                 this.user.username = localStorage.getItem('user.username')
                 this.user.email = localStorage.getItem('user.email')
                 this.user.mobile_number = localStorage.getItem('user.mobile_number')
+                this.user.profile_picture = localStorage.getItem('user.profile_picture')
                 this.user.isAuthenticated = true
 
                 this.refreshToken()
@@ -48,6 +50,7 @@ export const useUserStore = defineStore({
             this.user.username = null
             this.user.mobile_number = null
             this.user.email = null
+            this.user.profile_picture = null
 
             localStorage.setItem('user.access', '')
             localStorage.setItem('user.refresh', '')
@@ -55,6 +58,7 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.username', '')
             localStorage.setItem('user.mobile_number', '')
             localStorage.setItem('user.email', '')
+            localStorage.setItem('user.profile_picture', '')
         },
 
         setUserInfo(user) {
@@ -62,11 +66,13 @@ export const useUserStore = defineStore({
             this.user.username = user.username
             this.user.email = user.email
             this.user.mobile_number = user.mobile_number
+            this.user.profile_picture = user.profile_picture
 
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.username', this.user.username)
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.mobile_number', this.user.mobile_number)
+            localStorage.setItem('user.profile_picture', this.user.profile_picture)
         },
 
         refreshToken() {

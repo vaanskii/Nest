@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 
 from .models import User, FollowSystem
 from .serializers import UserSerializer
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
 
 @api_view(['GET'])
 def user(request):
@@ -21,6 +21,7 @@ def user(request):
         'username': request.user.username,
         'email': request.user.email,
         'mobile_number': mobile_number,
+        'profile_picture': request.user.get_profile_picture()
     })
 
 @api_view(['POST'])
@@ -69,6 +70,33 @@ def profileview(request, id):
         'user': user_serializer.data,
         'is_following': is_following,
     }, safe=False)
+
+@api_view(['POST'])
+def editprofile(request):
+    user = request.user
+    email = request.data.get('email') 
+    username = request.data.get('username')
+    mobile_number = request.data.get('mobile_number')
+
+    if User.objects.exclude(id=user.id).filter(email=email).exists():
+        return JsonResponse({'message': 'Email already exists'})
+    elif User.objects.exclude(id=user.id).filter(username=username).exists():
+        return JsonResponse({'message': 'Username already exists'})
+    elif User.objects.exclude(id=user.id).filter(mobile_number=mobile_number).exists():
+        return JsonResponse({'message': 'Mobile number already exists'})
+    else:
+        form = ProfileForm(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+
+        serializer = UserSerializer(user)
+
+        return JsonResponse({
+            'message': 'Information updated',
+            'user': serializer.data
+            }, safe=False)
+
 
 @api_view(['GET'])
 def following(request, id):

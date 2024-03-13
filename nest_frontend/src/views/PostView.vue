@@ -2,7 +2,7 @@
         <div v-if="post.id" class="flex justify-center flex-col items-center mt-10">
             <div class="w-[480px] bg-transparent border-b-2 mb-10 border-gray-500 rounded-[25px] pb-10 flex items-start flex-col group">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-900 rounded-full ml-10"></div>
+                    <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="py-3 flex"><strong class=" w-[100px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
                     <div class="flex flex-row ml-44">
@@ -76,7 +76,7 @@
             <div  v-if="comment" class="mb-6 flex items-start justify-between flex-col">
                 <div class="flex items-center space-x-6">
 
-                    <div class="w-8 h-8 bg-black rounded-full"></div>
+                    <img :src="comment.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <p>
                         <strong class="text-black mr-4">
                         <RouterLink :to="{name: 'profile', params:{'id': comment.created_by.id}}"> {{ comment.created_by.username }} </RouterLink> 

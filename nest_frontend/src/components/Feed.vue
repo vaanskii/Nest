@@ -27,7 +27,7 @@
         <div class="flex justify-center mb-5" v-for="(post, index) in posts" :key="post.id">
             <div class="w-[500px] bg-transparent border-b-2 mb-10 border-gray-500 rounded-[25px] pb-10 flex items-start flex-col group">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-900 rounded-full ml-12"></div>
+                    <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="-ml-6 py-3 flex"><strong class="w-[150px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
                     <div class="flex flex-row ml-40">

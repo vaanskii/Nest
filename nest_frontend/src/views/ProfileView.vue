@@ -1,7 +1,7 @@
 <template>
     <template v-if="userStore.user.isAuthenticated" class="flex justify-center items-center">
       <div class="flex justify-center flex-col items-center mt-10">
-        <div class="w-20 h-20 bg-gray-900 rounded-full"></div>
+        <img :src="user.get_profile_picture" class="w-[150px] max-h-[150px] rounded-full">
         <h1 class="mt-4"><strong>{{ user.username }}</strong></h1>
       </div>  
       <div class="flex flex-row justify-center space-x-4 mt-8" v-if="user.id">
@@ -30,12 +30,13 @@
         </button>
         
         <div v-else class="flex flex-row justify-center items-center">
-          <button
+          <RouterLink
+          :to="{name: 'editprofile'}"
           class="py-2 px-2 mb-5 mt-5 ml-10 bg-black text-white rounded-2xl w-80"
           
         >
           Edit profile
-          </button>
+          </RouterLink>
           <div class="menu-right ml-10" v-if="userStore.user.isAuthenticated">
               <a href="#" @click="logout()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
@@ -80,7 +81,7 @@
         >
             <div class="w-[480px] bg-transparent border-b-2 mb-10 border-gray-500 rounded-[25px] pb-10 flex items-start flex-col group">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-900 rounded-full ml-8"></div>
+                  <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="-ml-6 py-3 flex"><strong class="w-[150px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
                     <div class="flex flex-row ml-44">
