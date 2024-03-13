@@ -56,6 +56,10 @@
                             </label>
                         </div>
                     </div>
+                    <div>
+                        <label for="">Upload image</label>
+                        <input type="file" ref="file">
+                    </div>
 
                     <template v-if="errors.length > 0">
                         <div class="bg-red-300 text-white rounded-lg p-6">
@@ -116,6 +120,7 @@ export default{
 
             if (this.errors.length === 0) {
                 let formData = new FormData()
+                formData.append('profile_picture', this.$refs.file.files[0])
                 formData.append('username', this.form.username)
                 formData.append('email', this.form.email)
                 formData.append('mobile_number', this.form.mobile_number)
@@ -135,9 +140,9 @@ export default{
                                 username: this.form.username,
                                 email: this.form.email,
                                 mobile_number: this.form.mobile_number,
+                                profile_picture: response.data.get_profile_picture
                             })
-
-                            this.$router.push('/')
+                            this.$router.back()
                         } else {
                             this.toastStore.showToast(5000, `${response.data.message}. Please try again`, 'bg-red-300')
                         }

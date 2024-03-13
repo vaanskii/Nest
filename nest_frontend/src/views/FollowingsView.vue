@@ -6,7 +6,7 @@
             v-for="user in following"
             v-bind:key="user.id"    
             >
-            <div class="w-7 h-7 bg-black rounded-full ml-2"></div>
+            <img :src="user.get_profile_picture" class="w-8 max-h-8 ml-2 rounded-full">
             <p class="items-start flex ml-4 text-black w-[100px]">
             <strong>
               <p>{{ user.username }}</p>

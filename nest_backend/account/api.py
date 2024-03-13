@@ -85,7 +85,7 @@ def editprofile(request):
     elif User.objects.exclude(id=user.id).filter(mobile_number=mobile_number).exists():
         return JsonResponse({'message': 'Mobile number already exists'})
     else:
-        form = ProfileForm(request.POST, instance=user)
+        form = ProfileForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
             form.save()
