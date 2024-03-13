@@ -5,7 +5,7 @@
                     <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="py-3 flex"><strong class=" w-[100px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
-                    <div class="flex flex-row ml-44">
+                    <div class="flex flex-row ml-60">
                       <small class="text-md font-mono mr-3 mt-[1px] text-gray-500">{{ post.created_at_formatted }}</small> 
                       <Dropdown :post="post"/>
                     </div>
@@ -55,7 +55,7 @@
                             </button>
                             <label
                                 for="text-area"
-                                class="after:content[' '] pointer-events-none absolute left-0 -top-3 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-1.5 after:left-0 after:w-full after:scale-x-0 after:border-b-[1.5px] after:border-gray-900 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
+                                class="after:content[' '] pointer-events-none absolute left-0 -top-[12.5px] flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-1.5 after:left-0 after:w-full after:scale-x-0 after:border-b-[1.5px] after:border-gray-900 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
                             >
                                 COMMENT FOR {{ post.created_by.username.toUpperCase() }}
                             </label>
@@ -83,7 +83,7 @@
                         </strong>
                     </p>
                     <div class="flex flex-row items-center">
-                        <small class="text-gray-600 font-mono ml-40 text-[12px] font-thin mr-2">{{ comment.created_at_formatted }}</small>
+                        <small class="text-gray-600 font-mono ml-48 text-[12px] font-thin mr-2">{{ comment.created_at_formatted }}</small>
                         <CommentDropdown :comment="comment" :getPost="getPost"/>
                     </div>
                 </div>

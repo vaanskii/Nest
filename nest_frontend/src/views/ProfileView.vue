@@ -84,7 +84,7 @@
                   <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="-ml-6 py-3 flex"><strong class="w-[150px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
-                    <div class="flex flex-row ml-44">
+                    <div class="flex flex-row ml-60">
                       <small class="text-md font-mono mr-3 mt-[1px] text-gray-500">{{ post.created_at_formatted }}</small> 
                       <Dropdown :post="post" :index="index" :getUserPosts="getUserPosts"/>
                     </div>

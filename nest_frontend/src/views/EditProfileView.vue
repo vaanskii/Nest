@@ -56,9 +56,11 @@
                             </label>
                         </div>
                     </div>
-                    <div>
-                        <label for="">Upload image</label>
-                        <input type="file" ref="file">
+                    <div class="font-[sans-serif] max-w-md mx-auto">
+                        <label class="text-sm text-black mb-2 block uppercase">Change profile picture</label>
+                        <input type="file" ref="files"
+                            class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
+                        <p class="text-xs text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
                     </div>
 
                     <template v-if="errors.length > 0">
