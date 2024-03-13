@@ -1,22 +1,26 @@
 <template>
     <div class="">
-        <div class="main-center col-span-3 space-y-4">
-            <div 
-                class="p-4 bg-white border border-gray-200 rounded-lg"
-                v-for="notification in notifications"
-                v-bind:key="notification.id"
-                v-if="notifications.length"
-            >
-                {{ notification.body }} 
-                <button class="underline" @click="readNotification(notification)">Read more</button>
-            </div>
-
+        <div class="flex justify-center items-center flex-col mt-10">
+                <div
+                    v-for="notification in notifications"
+                    v-bind:key="notification.id"
+                    v-if="notifications.length"
+                    @click="readNotification(notification)"
+                    class="mb-5 cursor-pointer"
+                    >
+                    <div class="p-2 overflow-hidden bg-black py-4 w-[500px] items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex before:ease relative transition-all before:absolute before:right-0 before:top-0 before:h-14 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-15 before:duration-700 hover:shadow-black hover:before:-translate-x-40" role="alert">
+                        <span class="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3 ml-5">New</span>
+                        <span class="font-semibold mr-2 text-left flex-auto ml-10 text-lg">{{ notification.body }} </span>
+                        <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
+                    </div>
+                </div>
             <div 
                 class="p-4 bg-white border border-gray-200 rounded-lg"
                 v-else
             >
                 You don't have any unread notifications!
             </div>
+            
         </div>
     </div>
 </template>
