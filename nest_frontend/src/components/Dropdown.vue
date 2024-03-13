@@ -72,7 +72,6 @@
 
 <script>
   import { useUserStore } from "@/store/user";
-  import Feed from "@/components/Feed.vue";
   import axios from "axios";
   export default {
     setup() {

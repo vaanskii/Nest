@@ -8,6 +8,7 @@ import FollowersView from '../views/FollowersView.vue'
 import SearchView from '../views/SearchView.vue'
 import PostView from '../views/PostView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
+import NotificationsView from '../views/NotificationsView.vue'
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/posts/:id',
     name: 'postview',
     component: PostView
+  },
+  {
+    path: '/notifications',
+    name: 'notifications',
+    component: NotificationsView
   },
 ]
 

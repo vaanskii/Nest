@@ -4,8 +4,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from notifications.utils import create_notification
+
 from PIL import Image
-from io import BytesIO
 
 from .models import User, FollowSystem
 from .serializers import UserSerializer
@@ -141,7 +142,7 @@ def follow_user(request, id):
         return JsonResponse({'message': 'You cannot follow yourself!'}, status=400)
 
     if not request.user.following.filter(id=id).exists():
-        FollowSystem.objects.create(follower=request.user, following=user_to_follow)
+        following = FollowSystem.objects.create(follower=request.user, following=user_to_follow)
         print(f"Follow relationship created: {request.user.username} -> {user_to_follow.username}")
 
         request.user.following.add(user_to_follow)
@@ -152,6 +153,9 @@ def follow_user(request, id):
 
         request.user.save()
         user_to_follow.save()
+
+        notification = create_notification(request, 'new_following', following_id=following.id)
+
 
     return JsonResponse({'message': f'Now following {user_to_follow.username}'}, safe=False)
 

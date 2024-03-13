@@ -8,6 +8,7 @@ from account.models import User
 from account.serializers import UserSerializer
 from .forms import PostForm
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer
+from notifications.utils import create_notification
 from django.db.models import Q
 from django.db.models import F
 
@@ -95,6 +96,8 @@ def create_comment(request, id):
     post.comments_count += 1
     post.save()
 
+    notification = create_notification(request, 'post_comment', post_id=post.id)
+
     serializer = CommentSerializer(comment)
 
     return JsonResponse(serializer.data, safe=False)
@@ -127,6 +130,8 @@ def like_post(request, id):
         post.likes_count += 1
         post.save()
 
+        notification = create_notification(request, 'post_like', post_id=post.id)
+
         return JsonResponse({'message': 'Liked'})
     else:
         like = post.likes.filter(created_by=user).first()
@@ -150,6 +155,8 @@ def like_comment(request, id):
         comment.comment_likes.add(like)
         comment.comment_likes_count += 1
         comment.save()
+
+        notification = create_notification(request, 'comment_like', comment_id=comment.id)
 
         return JsonResponse({'message': 'Liked'})
     else:

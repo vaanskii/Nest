@@ -27,10 +27,9 @@
                     </svg>
                   </RouterLink>
 
-                  <RouterLink to="#">
+                  <RouterLink to="/notifications">
                     <div class="relative -mb-1 cursor-pointer">
-                      <div class="absolute w-5 h-5 items left-0 top-0  bg-red-400 rounded-full">
-                        <span class="text-[11px] absolute left-[4px] top-[3px] text-white">12</span>
+                      <div class="absolute w-4 h-4 items ml-1 mt-1  bg-red-400 rounded-full" v-if="notifications.length">
                       </div>
                       <div class="p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
@@ -80,6 +79,7 @@
 <script>
 import { useUserStore } from '@/store/user'
 import { RouterLink } from 'vue-router'
+import axios from 'axios'
 export default{
     setup() {
     const userStore = useUserStore()
@@ -88,7 +88,28 @@ export default{
       searchQuery: '',
     }
   },
-  methods: {
+  data() {
+    return {
+      notifications: []
+    }
+  },
+  mounted() {
+        this.getNotifications()
+    },
+
+    methods: {
+        getNotifications() {
+            axios
+                .get('/api/notifications/')
+                .then(response => {
+                    console.log(response.data)
+
+                    this.notifications = response.data
+                })
+                .catch(error => {
+                    console.log('Error: ', error)
+                })
+        },
     logout() {
       this.userStore.removeToken()
       this.$router.push('/login')

@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'account',
     'search',
     'posts',
+    'notifications',
 ]
 
 MIDDLEWARE = [
