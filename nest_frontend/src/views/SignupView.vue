@@ -1,7 +1,6 @@
 <template>
-
     <!-- component -->
-    <div class="flex mt-20">
+    <div class="flex mt-20" v-if="!userStore.user.isAuthenticated">
       <!-- Left Pane -->
       <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
         <div class="max-w-md text-center">
@@ -141,20 +140,25 @@
                 </div>
             </template>
         </form>
-      </div>
     </div>
-    
-    </template>
+</div>
+<div v-else-if="this.$router.push('/')">
+</div> 
+</template>
 
 <script>
 import axios from 'axios'
 import { useToastStore } from '@/store/toast'
+import { useUserStore } from '@/store/user'
+
 export default{
     setup() {
         const toastStore = useToastStore()
+        const userStore = useUserStore()
 
         return {
-            toastStore
+            toastStore,
+            userStore
         }
     },
     data() {

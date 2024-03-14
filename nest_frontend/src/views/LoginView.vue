@@ -1,7 +1,6 @@
 <template>
-
 <!-- component -->
-<div class="flex mt-20">
+<div class="flex mt-20" v-if="!userStore.user.isAuthenticated">
   <!-- Left Pane -->
   <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
     <div class="max-w-md text-center">
@@ -112,6 +111,8 @@
         </template>
     </form>
   </div>
+</div>
+<div v-else-if="this.$router.push('/')">
 </div>
 
 </template>

@@ -39,23 +39,14 @@
                     </div>
                   </RouterLink>
 
-                  <template v-if="userStore.user.isAuthenticated && userStore.user.id" >
-                    <RouterLink :to="{name: 'profile', params: {'id': userStore.user.id}}">
+                  <template v-if="userStore.user.isAuthenticated && userStore.user.id">
+                    <RouterLink :to="{name: 'profile', params: {'id': userStore.user.id}}" class="flex">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
                       <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
-                    </svg>         
+                    </svg>  
+                    <p class="ml-2 font-sans">{{ userStore.user.username }}</p>       
                   </RouterLink>
                   </template>
-              </div>
-              <div v-else class="ml-[800px] space-x-4">
-                      <RouterLink to="/login" class="rounded px-5 py-2.5 overflow-hidden group bg-black relative hover:bg-gradient-to-r hover:from-black hover:to-black text-white hover:ring-2 hover:ring-offset-2 hover:ring-black transition-all ease-out duration-300">
-                        <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                        <span class="relative px-5">Login</span>
-                      </RouterLink>
-                      <RouterLink to="/signup" class="rounded px-5 py-2.5 overflow-hidden group bg-black relative hover:bg-gradient-to-r hover:from-black hover:to-black text-white hover:ring-2 hover:ring-offset-2 hover:ring-black transition-all ease-out duration-300">
-                        <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                        <span class="relative px-4">Sign up</span>
-                      </RouterLink>
               </div>
               <div class="menu-right">
                     <form  v-on:submit.prevent="submitSearch" class="ml-10 mr-20" v-if="userStore.user.isAuthenticated">   

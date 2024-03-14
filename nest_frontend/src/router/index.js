@@ -10,6 +10,7 @@ import PostView from '../views/PostView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 import ChangePasswordView from '../views/ChangePasswordView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
+import Page404 from '../components/Page404.vue'
 
 const routes = [
   {
@@ -67,11 +68,32 @@ const routes = [
     name: 'notifications',
     component: NotificationsView
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'page404',
+    component: Page404
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
+
+router.beforeEach(async (to, from, next) => {
+  const { useUserStore } = await import('@/store/user');
+  const userStore = useUserStore();
+
+  // Check if the route requires authentication
+  const authRequired = !['login', 'signup'].includes(to.name);
+
+  if (authRequired && !userStore.user.isAuthenticated) {
+    // Redirect to the login page if not authenticated
+    next({ name: 'login' });
+  } else {
+    // Proceed to the route
+    next();
+  }
+});
 
 export default router

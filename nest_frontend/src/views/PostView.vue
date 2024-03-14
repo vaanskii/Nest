@@ -11,9 +11,12 @@
                     </div>
                 </div>
                 <div class="max-w-[420px] mt-2">
-                    <p class="w-[360px] md:w-[420px] ml-5 text-start rounded-lg mb-5 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
+                    <p class="w-[360px] md:w-[420px] text-start rounded-lg mb-1 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
                     {{ post.body }}
                     </p>
+                    <template v-if="post.attachments.length">
+                        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-[400px] ml-8 mb-4 rounded-xl">
+                    </template>
                 </div>
                 <div class="flex flex-row ml-14 -mb-4">
                     <div class="cursor-pointer">

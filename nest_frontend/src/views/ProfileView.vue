@@ -50,8 +50,8 @@
       <div class="flex justify-center mt-5">
         <hr class="w-[500px] h-0.5 mx-auto bg-gray-100 border-0 rounded my-3 dark:bg-black mb-5">
       </div>
-              <form v-on:submit.prevent="submitForm" method="post" class="mt-10">
-            <div class="p-4 flex justify-center mb-12">
+              <form v-on:submit.prevent="submitForm" method="post" class="flex flex-col justify-center items-center mt-5" v-if="userStore.user.id === user.id">
+                <div class="p-4 flex justify-center mb-10 flex-col">
                 <div class="relative w-[450px] min-w-[200px]">
                     <textarea
                         v-model="body"
@@ -59,7 +59,12 @@
                         placeholder=" "
                         id="text-area"
                     ></textarea>
+
+                    <div id="preview" v-if="url" class="w-[90px] mt-12 absolute">
+                        <img :src="url" >
+                    </div>
                     <button
+                        :disabled="isFormEmpty"
                         type="submit"
                         class="absolute right-0 bottom-0 mb-5 mr-2 h-10 w-20 bg-black text-white rounded-2xl"
                     >
@@ -72,8 +77,15 @@
                         TWEET FOR NEST
                     </label>
                 </div>
+                <div class="font-[sans-serif] mt-2 mb-12">
+                    <input 
+                        type="file" 
+                        ref="file" 
+                        @change="onFileChange"
+                        class="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" />
+                </div>
             </div>
-        </form>
+            </form>
       <div 
         class="flex justify-center"
         v-for="(post, index) in posts"
@@ -90,9 +102,12 @@
                     </div>
                 </div>
                 <div class="max-w-[420px] mt-2">
-                    <p class="w-[360px] md:w-[420px] ml-5 text-start rounded-lg mb-5 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
+                    <p class="w-[360px] md:w-[420px] text-start rounded-lg mb-1 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
                     {{ post.body }}
                     </p>
+                    <template v-if="post.attachments.length">
+                        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-[400px] ml-8 mb-4 rounded-xl">
+                    </template>
                 </div>
                 <div class="flex flex-row ml-14 -mb-4">
                     <div>
@@ -152,6 +167,7 @@
         posts: [],
         body: '',
         isDropdownVisible: null,
+        url: null
       };
     },
     components: {
@@ -171,7 +187,16 @@
         immediate: true,
       },
     },
+    computed: {
+        isFormEmpty() {
+            return !this.body && !this.url;
+        }
+    },
     methods: {
+      onFileChange(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
       logout() {
       this.userStore.removeToken()
       this.$router.push('/login')
@@ -183,17 +208,27 @@
       this.isDropdownVisible = index;
     }
   },
-    getUser() {
-      axios
-        .get(`/api/profile/${this.$route.params.id}/`)
-        .then((response) => {
-          this.user = response.data.user;
-          this.user.is_following = response.data.is_following;
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-    },
+  getUser() {
+  axios
+    .get(`/api/profile/${this.$route.params.id}/`)
+    .then((response) => {
+      if (response.data.user) {
+        this.user = response.data.user;
+        this.user.is_following = response.data.is_following;
+      } else {
+        // If the user is not found, redirect to the 404 page
+        this.$router.push({ name: 'page404' });
+      }
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 404) {
+        // If a 404 error is returned from the server, redirect to the 404 page
+        this.$router.push({ name: 'page404' });
+      } else {
+        console.log("error", error);
+      }
+    });
+},
     getUserPosts(){
       axios
           .get(`/api/posts/profile/${this.$route.params.id}/`)
@@ -208,7 +243,7 @@
     submitForm() {
             let formData = new FormData()
             formData.append('body', this.body)
-
+            formData.append('image', this.$refs.file.files[0])
             axios
                 .post('/api/posts/create/', formData, {
                     headers: {
@@ -218,6 +253,8 @@
                 .then(response => {
                     this.posts.unshift(response.data)
                     this.body = ''
+                    this.$refs.file.value = null
+                    this.$router.go()
 
                 })
                 .catch(error => {

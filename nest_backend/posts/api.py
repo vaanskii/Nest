@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from .models import Post, Comments, Like, CommentLike
 from account.models import User
 from account.serializers import UserSerializer
-from .forms import PostForm
+from .forms import PostForm, AttachmentForm
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer
 from notifications.utils import create_notification
 from django.db.models import Q
@@ -57,11 +57,21 @@ def profile_posts(request, id):
 @api_view(['POST'])
 def create_post(request):
     form = PostForm(request.POST)
+    attachment = None
+    attachment_form = AttachmentForm(request.POST, request.FILES)
+
+    if attachment_form.is_valid():
+        attachment = attachment_form.save(commit=False)
+        attachment.created_by = request.user
+        attachment.save()
 
     if form.is_valid():
         post = form.save(commit=False)
         post.created_by = request.user
         post.save()
+
+        if attachment:
+            post.attachments.add(attachment)
 
         user = request.user
         user.posts_count += 1
@@ -72,6 +82,7 @@ def create_post(request):
         return JsonResponse(serializer.data, safe=False)
     else:
         return JsonResponse({'error': 'add something here later!...'})
+    
     
 @api_view(['DELETE'])
 def delete_post(request, id):

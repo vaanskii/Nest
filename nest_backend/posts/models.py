@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from account.models import User
 from django.utils.timezone import now
+from django.conf import settings
 
 
 class Like(models.Model):
@@ -44,11 +45,25 @@ class Comments(models.Model):
         if len(self.body) > max_chars:
             return f"{self.body[:max_chars]}..."
         return self.body
+    
+
+class PostAttachment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    image = models.ImageField(upload_to='post_attachments')
+    created_by = models.ForeignKey(User, related_name='posts_attachments', on_delete=models.CASCADE)
+
+    def get_image(self):
+        if self.image:
+            return settings.WEBSITE_URL + self.image.url
+        else:
+            return ''
 
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     body = models.CharField(blank=True, null=True, max_length=2000)
+
+    attachments = models.ManyToManyField(PostAttachment, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
@@ -58,11 +73,6 @@ class Post(models.Model):
 
     comments = models.ManyToManyField(Comments, blank=True)
     comments_count = models.IntegerField(default=0)
-
-    def save(self, *args, **kwargs):
-        if not self.body:
-            return
-        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_at']
@@ -80,8 +90,5 @@ class Post(models.Model):
         else:
             return f"{minutes}m"
 
-
-
-
     def __str__(self):
-        return self.body
+        return self.body or str(self.attachments)
