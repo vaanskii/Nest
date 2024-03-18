@@ -19,15 +19,14 @@
                     </template>
                 </div>
                 <div class="flex flex-row ml-14 -mb-4">
-                    <div class="cursor-pointer">
-                        <svg @click="likePost(post.id)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black">
+                    <div class="cursor-pointer" @click="likePost(post.id)">
+                        <svg v-if="!post.liked" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg>
+                          </svg>
+
+                          <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
+                            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                          </svg>
                     </div>
                 </div>
                 <div class="flex flex-row ml-14 mt-7 -mb-4 items-center font-sans">
@@ -95,10 +94,14 @@
                     
                 </div>
                 <div class="flex flex-row space-x-3 justify-center items-center mt-5 ml-5">
-                    <div>
-                        <svg @click="likeComment(comment.id)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 cursor-pointer">
+                    <div @click="likeComment(comment.id)" class="cursor-pointer">
+                        <svg v-if="!comment.liked" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
+                          </svg>
+
+                          <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
+                            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                          </svg>
                     </div>
                 </div>
                 <p class="text-[13px] mt-3 ml-5 font-sans">{{ comment.comment_likes_count }} like</p>
@@ -149,44 +152,69 @@ export default {
     },
 
     methods: {
-        submitForm() {
-    if (!this.body.trim()) {
-        return;
-    }
+    submitForm() {
+        if (!this.body.trim()) {
+            return;
+        }
+        axios
+            .post(`/api/posts/${this.$route.params.id}/comment/`, {
+                'body': this.body
+            }) 
+            .then(response => {
+                console.log('data', response.data)
 
-    axios
-        .post(`/api/posts/${this.$route.params.id}/comment/`, {
-            'body': this.body
-        }) 
-        .then(response => {
-            console.log('data', response.data)
-
-            this.post.comments.unshift(response.data)
-            this.post.comments_count += 1
-            this.body = ''
-        })
-        .catch(error => {
-            console.log('error', error)
-        })
-},
-            getPost() {
-            axios
-                .get(`/api/posts/${this.$route.params.id}/`)
-                .then(response => {
-                    console.log('data', response.data)
-                    this.post = response.data.post
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
-        likePost(id) {
+                this.post.comments.unshift(response.data)
+                this.post.comments_count += 1
+                this.body = ''
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    },
+    getPost() {
+        axios
+            .get(`/api/posts/${this.$route.params.id}/`)
+            .then(response => {
+                console.log('data', response.data)
+                this.post = response.data.post
+                this.post.comments.forEach(comment => {
+                    this.fetchCommentLikeStatus(comment.id)
+                });
+                this.fetchLikeStatus(this.post.id)
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    },
+    fetchCommentLikeStatus(id) {
+        axios
+            .get(`/api/posts/${id}/check_comment_like/`)
+            .then(response => {
+                const comment = this.post.comments.find(comment => comment.id === id);
+                if (comment) {
+                    comment.liked = response.data.isLiked;
+                }
+            })
+            .catch(error => {
+                console.log('Error fetching comment like status', error);
+            });
+    },
+    fetchLikeStatus(id) {
+        axios
+            .get(`/api/posts/${id}/check-like-status/`)
+            .then(response => {
+                this.post.liked = response.data.isLiked;
+            })
+            .catch(error => {
+                console.error('Error fetching like status:', error);
+            });
+    },
+    likePost(id) {
         axios
             .post(`/api/posts/${id}/like/`)
             .then(response => {
                 if (response.data.message === 'Liked') {
                     this.post.likes_count++;
-                    // Assuming you have a flag in your post object to track the liked state
                     this.post.liked = true;
                 } else if (response.data.message === 'Unliked') {
                     this.post.likes_count--;
@@ -197,7 +225,6 @@ export default {
                 console.log('error', error);
             });
     },
-    // Method to handle liking a comment
     likeComment(id) {
         axios
             .post(`/api/posts/${id}/like-comment/`)
@@ -206,7 +233,6 @@ export default {
                 if (comment) {
                     if (response.data.message === 'Liked') {
                         comment.comment_likes_count++;
-                        // Assuming you have a flag in your comment object to track the liked state
                         comment.liked = true;
                     } else if (response.data.message === 'Unliked') {
                         comment.comment_likes_count--;
@@ -217,8 +243,6 @@ export default {
             .catch(error => {
                 console.log('error', error);
             });
-    }
-
-    }
+    }}
 }
 </script>

@@ -156,6 +156,14 @@ def like_post(request, id):
         else:
             return JsonResponse({'message': 'Error: Like not found'}, status=400)
         
+@api_view(['GET'])
+def check_like_status(request, id):
+    post = get_object_or_404(Post, id=id)
+    user = request.user
+    is_liked = post.likes.filter(created_by=user).exists()
+    return JsonResponse({'isLiked': is_liked})   
+
+
 @api_view(['POST'])
 def like_comment(request, id):
     comment = get_object_or_404(Comments, id=id)
@@ -181,3 +189,11 @@ def like_comment(request, id):
             return JsonResponse({'message': 'Unliked'})
         else:
             return JsonResponse({'message': 'error: Like not found'}, status=400)
+        
+
+@api_view(['GET'])
+def check_comment_like(request, id):
+    comment = get_object_or_404(Comments, id=id)
+    user = request.user
+    is_liked = comment.comment_likes.filter(created_by=user).exists()
+    return JsonResponse({'isLiked': is_liked})

@@ -111,10 +111,15 @@
                 </div>
                 <div class="flex flex-row ml-14 -mb-4">
                     <div>
-                        <div class="text-gray-500 text-xs cursor-pointer">
-                            <svg @click="likePost(post.id)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                            </svg>
+                        <div class="text-gray-500 text-xs cursor-pointer" @click="likePost(post.id)">
+                          <svg v-if="!post.liked" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                          </svg>
+
+                          <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
+                            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                          </svg>
+
                         </div>
                     </div>
                     <RouterLink :to="{'name': 'postview', params: {id: post.id}}" class="ml-3">
@@ -122,11 +127,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
                         </svg>
                     </RouterLink>
-                    <div class="ml-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg>
-                    </div>
                 </div>
                 <div class="flex flex-row ml-14 mt-7 -mb-4 items-center font-sans">
                     <small class="ml-1">{{ post.likes_count }} likes</small> 
@@ -193,53 +193,65 @@
         }
     },
     methods: {
-      onFileChange(e) {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
-        },
-      logout() {
+    fetchLikeStatus(id, index) {
+        axios
+            .get(`/api/posts/${id}/check-like-status/`)
+            .then(response => {
+                this.posts[index].liked = response.data.isLiked;
+            })
+            .catch(error => {
+                console.error('Error fetching like status:', error);
+            });
+    },
+    onFileChange(e) {
+        const file = e.target.files[0];
+        this.url = URL.createObjectURL(file);
+    },
+    logout() {
       this.userStore.removeToken()
       this.$router.push('/login')
     },
     toggleDropdown(index) {
-    if (this.isDropdownVisible === index) {
-      this.isDropdownVisible = null;
-    } else {
-      this.isDropdownVisible = index;
-    }
-  },
-  getUser() {
-  axios
-    .get(`/api/profile/${this.$route.params.id}/`)
-    .then((response) => {
-      if (response.data.user) {
-        this.user = response.data.user;
-        this.user.is_following = response.data.is_following;
+      if (this.isDropdownVisible === index) {
+        this.isDropdownVisible = null;
       } else {
-        // If the user is not found, redirect to the 404 page
-        this.$router.push({ name: 'page404' });
+        this.isDropdownVisible = index;
       }
+    },
+    getUser() {
+      axios
+          .get(`/api/profile/${this.$route.params.id}/`)
+          .then((response) => {
+            if (response.data.user) {
+              this.user = response.data.user;
+              this.user.is_following = response.data.is_following;
+            } else {
+              this.$router.push({ name: 'page404' });
+            }
     })
     .catch((error) => {
       if (error.response && error.response.status === 404) {
-        // If a 404 error is returned from the server, redirect to the 404 page
         this.$router.push({ name: 'page404' });
       } else {
         console.log("error", error);
       }
     });
 },
-    getUserPosts(){
+    getUserPosts() {
       axios
           .get(`/api/posts/profile/${this.$route.params.id}/`)
           .then(response => {
-            this.posts = response.data.posts
-            this.user = response.data.user
+            this.posts = response.data.posts;
+            this.user = response.data.user;
+            // Fetch like status for each post
+            this.posts.forEach((post, index) => {
+              this.fetchLikeStatus(post.id, index);
+            });
           })
           .catch(error => {
-            console.log('error', error)
-          })
-    },
+            console.error('Error fetching user posts:', error);
+          });
+      },
     submitForm() {
             let formData = new FormData()
             formData.append('body', this.body)
@@ -293,28 +305,28 @@
         });
     },
     likePost(id) {
-      axios
-        .post(`/api/posts/${id}/like/`)
-        .then(response => {
-          const postIndex = this.posts.findIndex(post => post.id === id);
+  axios
+    .post(`/api/posts/${id}/like/`)
+    .then(response => {
+      const postIndex = this.posts.findIndex(post => post.id === id);
 
-          if (postIndex !== -1) {
-            if (response.data.message === 'Liked') {
-              this.posts[postIndex].likes_count += 1;
-              console.log('liked')
-            } else if (response.data.message === 'Unliked') {
-              this.posts[postIndex].likes_count -= 1;
-              console.log('unliked')
-            } else {
-              console.log('try again');
-            }
-          }
-        })
-        .catch(error => {
-          console.log('error', error);
+      if (postIndex !== -1) {
+        if (response.data.message === 'Liked') {
+          this.posts[postIndex].likes_count += 1;
+          this.posts[postIndex].liked = true; // Update liked state
+        } else if (response.data.message === 'Unliked') {
+          this.posts[postIndex].likes_count -= 1;
+          this.posts[postIndex].liked = false; // Update liked state
+        } else {
+          console.log('try again');
         }
-    );
+      }
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
 }
+
 
   },
   };
