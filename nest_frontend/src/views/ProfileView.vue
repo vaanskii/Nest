@@ -140,6 +140,9 @@
     <template v-else>
       <h1><strong>Please Login to see the profile page</strong></h1>
     </template>
+    <div v-if="posts.length == 0">
+        <h1>You don't have posts yet...</h1>
+    </div>
   </template>
   
   <script>

@@ -84,6 +84,10 @@
     <div v-else>
         <h1>Please login or signup!</h1>
     </div>
+    <div v-if="posts.length == 0">
+        <h1>No posts yet...</h1>
+        <h1>Post something or follow someone to see their posts!</h1>
+    </div>
 </template>
 
 <script>
