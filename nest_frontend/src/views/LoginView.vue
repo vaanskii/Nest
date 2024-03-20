@@ -75,9 +75,9 @@
     </div>
   </div>
   <!-- Right Pane -->
-  <div class="w-full lg:w-1/2 flex items-center justify-center">
+  <div class="lg:w-1/2 flex items-center justify-center">
     <form v-on:submit.prevent="submitForm" class="flex justify-center items-center flex-col">
-        <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+        <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
           <input
             type="text"
             v-model="form.username"
@@ -87,7 +87,7 @@
           </label>
         </div>
 
-        <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+        <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
           <input
             type="password"
             v-model="form.password"
