@@ -26,8 +26,29 @@
               </div>
 
 
-              <div v-if="isBurgerVisible" class="absolute inset z-40 h-screen mt-[850px] w-full bg-white">
-                <div class="flex flex-col gap-5 justify-center items-center mt-40" v-if="userStore.user.isAuthenticated">
+              <div v-if="isBurgerVisible" class="absolute inset z-40 h-screen mt-[700px] w-full bg-white">
+                <div class="menu-top flex justify-center items-center mt-20">
+                    <form  v-on:submit.prevent="submitSearch" v-if="userStore.user.isAuthenticated">   
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input
+                              v-model="searchQuery"
+                              type="search"
+                              @keydown.enter.prevent="searchOnEnter"
+                              id="default-search"
+                              class="block w-[350px] mt-10 p-2 ps-10 text-sm border rounded-2xl bg-gray-200 text-gray-900 placeholder-gray-700 focus:border-gray-900 focus:border-opacity-80 transition-all duration-300 focus:outline-none"
+                              placeholder="Search on NEST..."
+                              required
+                              @focus="toggleBurger()"
+                            />
+                        </div>
+                    </form>
+                  </div>
+                <div class="flex flex-col gap-5 justify-center items-center mt-10" v-if="userStore.user.isAuthenticated">
                   <RouterLink to="/" class="flex justify-center items-center" @click="toggleBurger()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
                       <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
@@ -58,27 +79,6 @@
                 </template>
                 <p class="ml-2 font-sans">{{ userStore.user.username }}</p>       
               </div>
-              <div class="menu-right">
-                    <form  v-on:submit.prevent="submitSearch" class="ml-10 mr-20" v-if="userStore.user.isAuthenticated">   
-                        <div class="relative">
-                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                                </svg>
-                            </div>
-                            <input
-                              v-model="searchQuery"
-                              type="search"
-                              @keydown.enter.prevent="searchOnEnter"
-                              id="default-search"
-                              class="block w-[350px] mt-10 p-2 ps-10 text-sm border rounded-2xl bg-gray-200 text-gray-900 placeholder-gray-700 focus:border-gray-900 focus:border-opacity-80 transition-all duration-300 focus:outline-none"
-                              placeholder="Search on NEST..."
-                              required
-                              @focus="toggleBurger()"
-                            />
-                        </div>
-                    </form>
-                  </div>
               </div>
 
 

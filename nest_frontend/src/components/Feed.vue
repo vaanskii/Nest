@@ -1,11 +1,11 @@
 <template>
-    <div class="flex flex-col justify-center items-center mt-5" v-if="userStore.user.isAuthenticated">
+    <div class="flex flex-col justify-center items-center mt-5 overflow-y-hidden" v-if="userStore.user.isAuthenticated">
         <form v-on:submit.prevent="submitForm" method="post">
             <div class="p-4 flex justify-center mb-10 flex-col">
-                <div class="relative w-[450px] min-w-[200px]">
+                <div class="relative w-[250px] md:w-[450px] min-w-[200px] ">
                     <textarea
                         v-model="body"
-                        class="peer h-14 w-[320px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                        class="peer h-14 w-[250px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                         placeholder=" "
                         id="text-area"
                     ></textarea>
@@ -16,13 +16,13 @@
                     <button
                         :disabled="isFormEmpty"
                         type="submit"
-                        class="absolute right-0 bottom-0 mb-5 mr-2 h-10 w-20 bg-black text-white rounded-2xl"
+                        class="absolute right-0 bottom-0 mb-5 -mr-12 md:mr-2 h-10 w-20 bg-black text-white rounded-2xl"
                     >
                         Post
                     </button>
                     <label
                         for="text-area"
-                        class="after:content[' '] pointer-events-none absolute left-0 -top-[12.5px] flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-1.5 after:left-0 after:w-full after:scale-x-0 after:border-b-[1.5px] after:border-gray-900 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
+                        class="after:content[' '] pointer-events-none absolute left-0 -top-[12.5px] flex h-full w-[300px] select-none text-[11px] font-normal leading-tight text-blue-gray-500 transition-all after:absolute after:-bottom-1.5 after:left-0 after:w-full after:scale-x-0 after:border-b-[1.5px] after:border-gray-900 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
                     >
                         TWEET FOR NEST
                     </label>
