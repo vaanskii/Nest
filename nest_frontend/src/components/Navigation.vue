@@ -26,7 +26,7 @@
               </div>
 
 
-              <div v-if="isBurgerVisible" class="absolute inset z-40 h-full mt-[850px] w-full bg-white">
+              <div v-if="isBurgerVisible" class="absolute inset z-40 h-screen mt-[850px] w-full bg-white">
                 <div class="flex flex-col gap-5 justify-center items-center mt-40" v-if="userStore.user.isAuthenticated">
                   <RouterLink to="/" class="flex justify-center items-center" @click="toggleBurger()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
