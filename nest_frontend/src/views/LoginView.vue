@@ -75,7 +75,7 @@
     </div>
   </div>
   <!-- Right Pane -->
-  <div class="lg:w-1/2 flex items-center justify-center">
+  <div class="max-w-screen-sm mx-auto md:flex md:justify-center md:items-center flex items-center justify-center text-center sm:text-center sm:mx-auto md:mx-auto">
     <form v-on:submit.prevent="submitForm" class="flex justify-center items-center flex-col">
         <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
           <input
@@ -102,7 +102,7 @@
           <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
           <span class="relative text-black group-hover:text-white">Login</span>
         </button>
-        <p class="mt-4">Don't have an account <RouterLink class="underline ml-1 mr-1" to="/signup">Click here</RouterLink>create an account!</p>
+        <p class="mt-4 md:w-[500px] w-[300px]">Don't have an account <RouterLink class="underline ml-1 mr-1" to="/signup">Click here</RouterLink>create an account!</p>
 
         <template v-if="errors.length > 0">
             <div class="bg-red-300 text-white rounded-lg p-6">
@@ -134,7 +134,7 @@ export default {
         username: '',
         password: ''
       },
-      errors: []
+      errors: [],
     }
   },
   methods: {

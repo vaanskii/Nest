@@ -75,9 +75,9 @@
         </div>
       </div>
       <!-- Right Pane -->
-      <div class="w-full lg:w-1/2 flex items-center justify-center">
+      <div class="max-w-screen-sm mx-auto md:flex md:justify-center md:items-center flex items-center justify-center text-center sm:text-center sm:mx-auto md:mx-auto">
         <form v-on:submit.prevent="submitForm" class="flex justify-center items-center flex-col">
-            <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+            <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
                 type="email"
                 v-model="form.email"
@@ -87,7 +87,7 @@
               </label>
             </div>
 
-            <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+            <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
                 type="text"
                 v-model="form.username"
@@ -97,7 +97,7 @@
               </label>
             </div>
 
-            <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+            <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
                 type="tel"
                 v-model="form.mobile_number"
@@ -107,7 +107,7 @@
               </label>
             </div>
     
-            <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+            <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
                 type="password"
                 v-model="form.password1"
@@ -117,7 +117,7 @@
               </label>
             </div>
 
-            <div class="relative w-[500px] min-w-[200px] h-11 mt-10">
+            <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
                 type="password"
                 v-model="form.password2"
@@ -132,7 +132,7 @@
               <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
               <span class="relative text-black group-hover:text-white">Sign up</span>
             </button>
-            <p class="mt-4">Already have an account <RouterLink class="underline ml-1 mr-1" to="/login">click here</RouterLink>to login!</p>
+            <p class="mt-4 md:w-[500px] w-[300px]">Already have an account <RouterLink class="underline ml-1 mr-1" to="/login">click here</RouterLink>to login!</p>
     
             <template v-if="errors.length > 0">
                 <div class="bg-red-300 text-white rounded-lg p-6">
