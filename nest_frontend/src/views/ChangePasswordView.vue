@@ -4,11 +4,11 @@
         <div class="mt-12">
             <form class="space-y-6" v-on:submit.prevent="submitForm">
                 <div class="p-4 flex justify-center">
-                    <div class="relative w-[450px] min-w-[200px]">
+                    <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                         <input
                             type="password"
                             v-model="form.old_password"
-                            class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                            class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                             placeholder=" "
                             id="username"
                         ></input>
@@ -22,11 +22,11 @@
                 </div>
 
                 <div class="p-4 flex justify-center">
-                    <div class="relative w-[450px] min-w-[200px]">
+                    <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                         <input
                             type="password"
                             v-model="form.new_password1"
-                            class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                            class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                             placeholder=" "
                             id="username"
                         ></input>
@@ -40,11 +40,11 @@
                 </div>
 
                 <div class="p-4 flex justify-center">
-                    <div class="relative w-[450px] min-w-[200px]">
+                    <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                         <input
                             type="password"
                             v-model="form.new_password2"
-                            class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                            class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                             placeholder=" "
                             id="username"
                         ></input>

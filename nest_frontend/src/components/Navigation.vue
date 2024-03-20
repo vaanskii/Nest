@@ -19,14 +19,14 @@
                     </svg>
                   </a>
               </div>
-              <div class="fixed md:hidden ml-[350px] z-50" @click="toggleBurger()" v-if="userStore.user.isAuthenticated">
+              <div class="absolute md:hidden ml-[350px] z-50" @click="toggleBurger()" v-if="userStore.user.isAuthenticated">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                   </svg>
               </div>
 
 
-              <div v-if="isBurgerVisible" class="absolute inset z-40 h-screen mt-[700px] w-full bg-white">
+              <div v-if="isBurgerVisible" class="absolute inset z-40 h-[1000px] mt-[700px] w-full bg-white">
                 <div class="menu-top flex justify-center items-center mt-20">
                     <form  v-on:submit.prevent="submitSearch" v-if="userStore.user.isAuthenticated">   
                         <div class="relative">
@@ -40,10 +40,9 @@
                               type="search"
                               @keydown.enter.prevent="searchOnEnter"
                               id="default-search"
-                              class="block w-[350px] mt-10 p-2 ps-10 text-sm border rounded-2xl bg-gray-200 text-gray-900 placeholder-gray-700 focus:border-gray-900 focus:border-opacity-80 transition-all duration-300 focus:outline-none"
+                              class="block w-[350px] mt-32 p-2 ps-10 text-sm border rounded-2xl bg-gray-200 text-gray-900 placeholder-gray-700 focus:border-gray-900 focus:border-opacity-80 transition-all duration-300 focus:outline-none"
                               placeholder="Search on NEST..."
                               required
-                              @focus="toggleBurger()"
                             />
                         </div>
                     </form>
@@ -77,8 +76,17 @@
                     </svg>  
                   </RouterLink>
                 </template>
-                <p class="ml-2 font-sans">{{ userStore.user.username }}</p>       
-              </div>
+                <p class="font-sans">{{ userStore.user.username }}</p>     
+                
+                    <div class="" v-if="userStore.user.isAuthenticated">
+                      <a href="#" @click="logout()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
+                          <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                      </a>
+                    </div>
+                    <h1>Logout</h1>
+                </div>
               </div>
 
 
@@ -187,6 +195,7 @@ export default{
         if (!event.shiftKey) {
         event.preventDefault();
         this.submitSearch();
+        this.isBurgerVisible = false;
         }
     },
   },

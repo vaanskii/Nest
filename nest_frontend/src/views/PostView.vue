@@ -1,24 +1,24 @@
 <template>
         <div v-if="post.id" class="flex justify-center flex-col items-center mt-10">
-            <div class="w-[480px] bg-transparent border-b-2 mb-10 border-gray-500 rounded-[25px] pb-10 flex items-start flex-col group">
+            <div class="w-[320px] md:w-[500px] bg-transparent border-b-2 mb-10 border-gray-500 rounded-[25px] pb-10 flex items-start flex-col group">
                 <div class="flex items-center">
                     <img :src="post.created_by.get_profile_picture" class="w-8 h-8 rounded-full">
                     <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}" class="py-3 flex"><strong class=" w-[100px] text-black font-medium">{{ post.created_by.username }} </strong>
                     </RouterLink>
-                    <div class="flex flex-row ml-60">
+                    <div class="flex flex-row ml-28 md:ml-60">
                       <small class="text-md font-mono mr-3 mt-[1px] text-gray-500">{{ post.created_at_formatted }}</small> 
                       <Dropdown :post="post"/>
                     </div>
                 </div>
                 <div class="max-w-[420px] mt-2">
-                    <p class="w-[360px] md:w-[420px] text-start rounded-lg mb-1 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
+                    <p class="w-[280px] md:w-[420px] text-start rounded-lg mb-1 -mt-1 pb-3 pl-10 flex justify-start font-sans break-all">
                     {{ post.body }}
                     </p>
                     <template v-if="post.attachments.length">
-                        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-[400px] ml-8 mb-4 rounded-xl">
+                        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-[250px] md:w-[400px] ml-10 mb-4 rounded-xl">
                     </template>
                 </div>
-                <div class="flex flex-row ml-14 -mb-4">
+                <div class="flex flex-row ml-10 -mb-4">
                     <div class="cursor-pointer" @click="likePost(post.id)">
                         <svg v-if="!post.liked" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -29,7 +29,7 @@
                           </svg>
                     </div>
                 </div>
-                <div class="flex flex-row ml-14 mt-7 -mb-4 items-center font-sans">
+                <div class="flex flex-row ml-10 mt-7 -mb-4 items-center font-sans">
                     <small class="ml-1">{{ post.likes_count }} likes</small> 
                     <span class=" w-[3px] h-[3px] bg-gray-600 items-center rounded-full ml-1 mr-1"></span>
                     <small class="mr-1">{{ post.comments_count }} replies</small>
@@ -40,16 +40,16 @@
             <div class="bg-white  text-black text-center rounded-lg mt-2">
                 <form v-on:submit.prevent="submitForm" method="post">
                     <div class="p-4 flex justify-center mb-10">
-                        <div class="relative w-[450px] min-w-[200px]">
+                        <div class="relative w-[240px] md:w-[450px] min-w-[200px]">
                             <textarea
                                 v-model="body"
-                                class="peer h-14 w-[320px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                                class="peer h-14 w-[210px] md:w-[320px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                                 placeholder=" "
                                 id="text-area"
                             ></textarea>
                             <button
                                 type="submit"
-                                class="absolute right-0 bottom-0 mb-5 mr-2 h-10 w-20 bg-black flex justify-center items-center text-white rounded-2xl"
+                                class="absolute right-0 bottom-0 mb-5 -mr-10 md:mr-2 h-10 w-16 md:w-20 bg-black text-white rounded-2xl flex justify-center items-center"
                             >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                                 <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
@@ -68,9 +68,9 @@
         
 
         <!-- Comments -->
-        <div v-if="post.comments.length" class="w-[440px] flex justify-center flex-col items-center mb-20">
+        <div v-if="post.comments.length" class="w-[300px] md:w-[440px] flex justify-center flex-col items-center mb-20">
             <div
-            class="border-gray-700 rounded-[25px] w-[400px]"
+            class="border-gray-700 rounded-[25px] w-[300px] md:w-[400px]"
             v-for="comment in post.comments"
             v-bind:key="comment?.id"
             >
@@ -85,13 +85,12 @@
                         </strong>
                     </p>
                     <div class="flex flex-row items-center">
-                        <small class="text-gray-600 font-mono ml-48 text-[12px] font-thin mr-2">{{ comment.created_at_formatted }}</small>
+                        <small class="text-gray-600 font-mono ml-10 md:ml-48 text-[12px] font-thin mr-2">{{ comment.created_at_formatted }}</small>
                         <CommentDropdown :comment="comment" :getPost="getPost"/>
                     </div>
                 </div>
-                <div class="max-w-[390px]">
+                <div class="w-[280px] md:w-[390px]">
                     <p class="mt-8 text-start ml-5 text-black font-thin whitespace-pre-line break-words">{{ comment.body }}</p>
-                    
                 </div>
                 <div class="flex flex-row space-x-3 justify-center items-center mt-5 ml-5">
                     <div @click="likeComment(comment.id)" class="cursor-pointer">

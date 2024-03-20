@@ -4,11 +4,11 @@
             <div class="mt-12">
                 <form class="space-y-6" v-on:submit.prevent="submitForm">
                     <div class="p-4 flex justify-center">
-                        <div class="relative w-[450px] min-w-[200px]">
+                        <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                             <input
                                 type="text"
                                 v-model="form.username"
-                                class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                                class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                                 placeholder=" "
                                 id="username"
                             ></input>
@@ -22,11 +22,11 @@
                     </div>
 
                     <div class="p-4 flex justify-center mb-12">
-                        <div class="relative w-[450px] min-w-[200px]">
+                        <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                             <input
                                 type="email"
                                 v-model="form.email"
-                                class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                                class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                                 placeholder=" "
                                 id="email"
                             ></input>
@@ -40,11 +40,11 @@
                     </div>
 
                     <div class="p-4 flex justify-center mb-12">
-                        <div class="relative w-[450px] min-w-[200px]">
+                        <div class="relative w-[280px] md:w-[450px] min-w-[200px]">
                             <input
                                 type="tel"
                                 v-model="form.mobile_number"
-                                class="peer h-14 w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
+                                class="peer h-14 w-[280px] md:w-[450px] mr-16 overflow-hidden resize-none border-b border-gray-400 bg-transparent pb-1.5 pt-3 pl-4 font-sans text-sm font-normal text-gray-900 outline outline-0 transition-all focus:border-gray-900 focus:outline-0"
                                 placeholder=" "
                                 id="mobile-number"
                             ></input>
@@ -56,7 +56,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="font-[sans-serif] max-w-md mx-auto">
+                    <div class="font-[sans-serif] w-[280px] md:w-[450px] mx-auto">
                         <label class="text-sm text-black mb-2 block uppercase">Change profile picture</label>
                         <input type="file" ref="files"
                             class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
@@ -74,7 +74,7 @@
                     </div>
                 </form>
             </div>
-            <div class="mt-10 py-4 w-[320px] ml-[82px] rounded-lg border-black bg-black text-white border">
+            <div class="mt-10 py-4 w-[320px] ml-0 md:ml-[82px] rounded-lg border-black bg-black text-white border">
                 <RouterLink  :to="{name: 'changepassword'}">Change password</RouterLink>
             </div>
         </div>
