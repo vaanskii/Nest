@@ -225,32 +225,3 @@ export default{
     }
 }
 </script>
-
-
-
-<!-- 
-    <form class="space-y-4 md:space-y-6 bg-gray-600" v-on:submit.prevent="submitForm">
-        <div>
-            <input type="email" v-model="form.email" placeholder="Enter email">
-        </div>
-        <div>
-            <input type="text" v-model="form.username" placeholder="Enter username">
-        </div>
-        <div>
-            <input type="tel" v-model="form.mobile_number" placeholder="Enter mobile number">
-        </div>
-        <div>
-            <input type="password" v-model="form.password1" placeholder="Enter password">
-        </div>
-        <div>
-            <input type="password" v-model="form.password2" placeholder="Confirm password">
-        </div>
-        <button type="submit" class="p-4 bg-gray-900 rounded-lg">Create account</button>
-        
-        <template v-if="errors.length > 0">
-            <div class="bg-red-300 text-white rounded-lg p-6">
-                <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-            </div>
-        </template>
-    </form>
- -->
