@@ -1,6 +1,6 @@
 <template>
     <!-- component -->
-    <div class="flex mt-20" v-if="!userStore.user.isAuthenticated">
+    <div class="flex flex-col lg:flex-row mt-20" v-if="!userStore.user.isAuthenticated">
       <!-- Left Pane -->
       <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
         <div class="max-w-md text-center">
@@ -75,7 +75,7 @@
         </div>
       </div>
       <!-- Right Pane -->
-      <div class="max-w-screen-sm mx-auto md:flex md:justify-center md:items-center flex items-center justify-center text-center sm:text-center sm:mx-auto md:mx-auto">
+      <div class="max-w-screen-sm mx-auto md:flex md:justify-center md:items-center flex items-center justify-center text-center sm:text-center sm:mx-auto md:mx-auto w-full lg:w-1/2 p-10 bg-white text-black">
         <form v-on:submit.prevent="submitForm" class="flex justify-center items-center flex-col">
             <div class="relative w-[300px] md:w-[500px] min-w-[200px] h-11 mt-10">
               <input
