@@ -19,7 +19,70 @@
                     </svg>
                   </a>
               </div>
-              <div class="menu-center flex items-center space-x-12 justify-center pl-32" v-if="userStore.user.isAuthenticated">
+              <div class="fixed md:hidden ml-[350px] z-50" @click="toggleBurger()">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+              </div>
+
+
+              <div v-if="isBurgerVisible" class="absolute inset z-40 h-full mt-[990px] w-full bg-white">
+                <div class="flex flex-col gap-5 justify-center items-center" v-if="userStore.user.isAuthenticated">
+                  <RouterLink to="/" class="flex justify-center items-center" @click="toggleBurger()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
+                      <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                      <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                    </svg>
+                  </RouterLink>
+                  <h1 class="">Home</h1>
+
+                  <RouterLink to="/notifications" class="flex flex-col justify-center items-center" @click="toggleBurger()">
+                    <div class="relative -mb-1 cursor-pointer">
+                      <div class="absolute w-4 h-4 items ml-1 mt-1  bg-red-400 rounded-full" v-if="notifications.length">
+                      </div>
+                      <div class="p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
+                          <path fill-rule="evenodd" d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  </RouterLink>
+                  <h1 class="">Notifications</h1>
+
+                  <template v-if="userStore.user.isAuthenticated && userStore.user.id">
+                    <RouterLink :to="{name: 'profile', params: {'id': userStore.user.id}}" class="flex" @click="toggleBurger()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-black">
+                      <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                    </svg>  
+                  </RouterLink>
+                </template>
+                <p class="ml-2 font-sans">{{ userStore.user.username }}</p>       
+              </div>
+              <div class="menu-right">
+                    <form  v-on:submit.prevent="submitSearch" class="ml-10 mr-20" v-if="userStore.user.isAuthenticated">   
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input
+                              v-model="searchQuery"
+                              type="search"
+                              @keydown.enter.prevent="searchOnEnter"
+                              id="default-search"
+                              class="block w-[350px] mt-10 p-2 ps-10 text-sm border rounded-2xl bg-gray-200 text-gray-900 placeholder-gray-700 focus:border-gray-900 focus:border-opacity-80 transition-all duration-300 focus:outline-none"
+                              placeholder="Search on NEST..."
+                              required
+                              @focus="toggleBurger()"
+                            />
+                        </div>
+                    </form>
+                  </div>
+              </div>
+
+
+              <div class="menu-center items-center space-x-12 justify-center pl-32 md:flex hidden" v-if="userStore.user.isAuthenticated">
                   <RouterLink to="/" class="text-purple-700">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
                       <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
@@ -48,7 +111,7 @@
                   </RouterLink>
                   </template>
               </div>
-              <div class="menu-right">
+              <div class="menu-right md:flex hidden">
                     <form  v-on:submit.prevent="submitSearch" class="ml-10 mr-20" v-if="userStore.user.isAuthenticated">   
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -68,8 +131,8 @@
                         </div>
                     </form>
                   </div>
+                </div>
           </div>
-      </div>
   </nav>
 </template>
 
@@ -87,7 +150,8 @@ export default{
   },
   data() {
     return {
-      notifications: []
+      notifications: [],
+      isBurgerVisible: false
     }
   },
   mounted() {
@@ -95,6 +159,9 @@ export default{
     },
 
     methods: {
+      toggleBurger() {
+      this.isBurgerVisible = !this.isBurgerVisible;
+    },
         getNotifications() {
             axios
                 .get('/api/notifications/')
