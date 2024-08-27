@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-ty*7mfi3l_ob+_1g3&c)(^-4)@_$**yor*vnc1_+l$@+0a21!d
 DEBUG = True
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'giorgi.vanadze003@gmail.com'
-EMAIL_HOST_PASSWORD = 'bbpc mwfd zmzp smmf'
+EMAIL_HOST_USER = 'your mail'
+EMAIL_HOST_PASSWORD = 'your password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -49,18 +49,20 @@ REST_FRAMEWORK = {
     ],
 }
 
+ALLOWED_HOSTS = ['*']
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://192.168.1.106:8080",
-    "http://192.168.1.107:8080",
-    "http://192.168.200.15:8080"
+    "http://localhost:8081",
+    "http://192.168.1.106:8081",
+    "http://192.168.1.107:8081",
+    "http://192.168.200.15:8081"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8080",
-    "http://192.168.1.106:8080",
-    "http://192.168.1.107:8080",
-    "http://192.168.200.15:8080"
+    "http://localhost:8081",
+    "http://192.168.1.106:8081",
+    "http://192.168.1.107:8081",
+    "http://192.168.200.15:8081"
 ]
 
 
@@ -85,6 +87,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,6 +166,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
