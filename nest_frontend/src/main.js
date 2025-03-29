@@ -10,7 +10,7 @@ import axios from 'axios'
 axios.defaults.baseURL = "https://vaanskii.pythonanywhere.com"
 const app = createApp(App)
 
-if (import.meta.env.PROD) {
+if (process.env.NODE_ENV === 'production') {
     console.log = () => {};
     console.warn = () => {};
     console.error = () => {};
