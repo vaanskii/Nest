@@ -80,20 +80,4 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach(async (to, from, next) => {
-  const { useUserStore } = await import('@/store/user');
-  const userStore = useUserStore();
-
-  // Check if the route requires authentication
-  const authRequired = !['login', 'signup'].includes(to.name);
-
-  if (authRequired && !userStore.user.isAuthenticated) {
-    // Redirect to the login page if not authenticated
-    next({ name: 'login' });
-  } else {
-    // Proceed to the route
-    next();
-  }
-});
-
 export default router
